@@ -527,19 +527,35 @@ export const en = {
         desc: 'No. We do not use third-party user tracking scripts, advertising pixels, or analytics trackers. You do not need to register, provide an email address, or consent to cookie profiles.'
       }
     ],
-    verifyBadge: 'Independent Verification',
-    verifyTitle: 'How to verify that your images never leave your computer',
-    verifySubtitle: 'You don’t have to take our word for it. Any modern web browser allows you to inspect all network traffic in real time:',
+    evidence1Badge: 'Evidence 1: 100% Open-Source Audit',
+    evidence1Title: 'Fully open source — anyone can audit every line of logic',
+    evidence1Desc: 'To eliminate any doubt about images being secretly uploaded to the cloud, ImageKit open-sources its entire front-end codebase. Real privacy is not a marketing promise — it is public code that stands up to independent review by developers worldwide.',
+    evidence1Points: [
+      {
+        title: 'Zero Backend & Cloud Storage Interfaces',
+        desc: 'The codebase contains no server endpoint that receives image uploads, no object-storage (S3/OSS) SDK, and no remote relay service — physically cutting off every data exfiltration channel.'
+      },
+      {
+        title: 'Pure Front-End Native APIs',
+        desc: 'Image scaling, compression and format transcoding are built entirely on native browser HTMLCanvasElement and Web APIs — no obfuscated closed-source binaries or black-box tracking modules.'
+      },
+      {
+        title: 'Self-Buildable & Offline-Capable',
+        desc: 'Clone the repository to your own machine at any time, then build and run it with the internet connection completely cut off — keeping 100% control over your data.'
+      }
+    ],
+    evidence1Cta: 'Audit the Source on GitHub',
+    evidence1CopyBtn: 'Copy Command',
+    evidence1Copied: 'Copied',
+    evidence2Badge: 'Evidence 2: Live Capture in Browser DevTools',
+    evidence2Title: 'See zero network requests with your own eyes',
+    evidence2Subtitle: 'Every modern browser ships with a built-in network monitor, so you can capture packets in real time while processing images:',
     steps: [
       'Open Developer Tools by pressing F12 (or Cmd + Option + I on macOS).',
       'Switch to the Network tab in DevTools.',
       'Drop an image into ImageKit and adjust compression or format settings.',
       'Notice that zero upload (POST/PUT) requests appear in the Network tab. You can even disconnect your Wi-Fi or turn on Airplane Mode and the tools continue working seamlessly!'
     ],
-    openSourceTitle: 'Built in the Open',
-    openSourceDesc: 'ImageKit is fully open source. Every step of the image processing pipeline lives in public code — take a look, poke around, and see exactly how local processing works under the hood.',
-    openSourceContribute: 'Spotted a bug or have an idea? Open an issue, send a PR, and help make it better.',
-    openSourceCta: 'View on GitHub',
     ctaPrompt: 'Ready to test with complete peace of mind?',
     ctaBtn: 'Start Compressing'
   },

@@ -527,19 +527,35 @@ export const zh = {
         desc: '完全不收集。我们不植入任何第三方追踪 SDK、广告追踪像素代码或商业数据监控模块。无需绑定邮箱，无需接受 Cookie 追踪协议。'
       }
     ],
-    verifyBadge: '自主技术验证指南',
-    verifyTitle: '如何亲眼验证您的图片从未离开过您的电脑',
-    verifySubtitle: '口说无凭，任何主流现代浏览器都为您提供了清晰透明的网络监控检查窗口：',
+    evidence1Badge: '验证凭据 1：100% 源代码开源审计',
+    evidence1Title: '代码完全开源，任何人均可审查每一行逻辑',
+    evidence1Desc: '为了彻底打消用户对“云端上传图片”的疑虑，ImageKit 将全部前端源码完整开源。真正的隐私不是商业包装的空头承诺，而是每一行公开代码经得起全球开发者的独立审查。',
+    evidence1Points: [
+      {
+        title: '零后端与云存储接口',
+        desc: '代码库中不存在任何接收图片上传的服务器端点、对象存储（S3/OSS）SDK 或远程中转服务，彻底从物理上切断数据外泄通道。'
+      },
+      {
+        title: '纯前端原生 API 实现',
+        desc: '图像缩放、压缩与格式转码全部基于现代浏览器原生 HTMLCanvasElement 与 Web API，无任何混淆闭源二进制或黑盒追踪模块。'
+      },
+      {
+        title: '支持自主构建与离线运行',
+        desc: '您可以随时将仓库代码克隆到本地计算机，在完全切断互联网连接的状态下自主编译、运行，确保 100% 数据掌控权。'
+      }
+    ],
+    evidence1Cta: '前往 GitHub 审查项目源码',
+    evidence1CopyBtn: '复制指令',
+    evidence1Copied: '已复制',
+    evidence2Badge: '验证凭据 2：浏览器 DevTools 实时抓包',
+    evidence2Title: '使用开发者工具亲眼确认零网络请求',
+    evidence2Subtitle: '任何主流现代浏览器都内置了网络监视窗口，您可以在处理图片的同时实时抓包验证：',
     steps: [
       '在键盘上按下 F12（或在 Mac 上按下 Cmd + Option + I）打开浏览器开发者工具。',
       '切换至顶部的“网络”（Network）选项卡。',
       '将任意图片拖入 ImageKit 并调整压缩比例或目标格式。',
       '仔细观察网络面板：完全没有任何 POST、PUT 等图片文件上传请求。您甚至可以断开 Wi-Fi 或开启飞行模式，工具依然畅快运行！'
     ],
-    openSourceTitle: '开源共建',
-    openSourceDesc: 'ImageKit 完全开源。图片处理的每一步实现都写在公开的代码里——欢迎随时翻阅、审视，看看本地处理在底层究竟是如何工作的。',
-    openSourceContribute: '发现 Bug 或有好点子？欢迎提 Issue、提 PR，一起把它做得更好。',
-    openSourceCta: '在 GitHub 查看代码',
     ctaPrompt: '准备好毫无顾虑地处理您的照片了吗？',
     ctaBtn: '立即开始体验压缩'
   },
