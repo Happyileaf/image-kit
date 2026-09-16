@@ -61,13 +61,12 @@ export const enTools: ToolDefinition[] = [
     id: 'watermark',
     name: 'Watermark',
     shortDesc: 'Add text or logo image watermarks to protect your work.',
-    fullDesc: 'Stamp copyright notices, subtle logos, or repeated tile watermarks with custom opacity and positioning.',
+    fullDesc: 'Stamp text or logo watermarks with 9-anchor positioning, adjustable opacity, and an optional tiled mode — all rendered locally on canvas, sized relative to each image.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'Stamp',
     acceptedFormats: 'image/*',
-    features: ['Text & image logo overlay', 'Opacity & tile controls', 'Batch stamping']
+    features: ['Text & logo watermarks', '9-anchor grid positioning', 'Tiled mode & opacity control', 'Batch stamping']
   },
   {
     id: 'blur',
@@ -298,6 +297,44 @@ export const en = {
     heightAuto: 'Auto-calculated from width',
     percentLabel: 'Scale Percentage',
     presetsLabel: 'Social Media Presets',
+    applyBtn: 'Apply Changes to All Images'
+  },
+
+  // Watermarker Settings
+  watermarker: {
+    title: 'Watermark Settings',
+    badge: 'Client-side Canvas',
+    typeLabel: 'Watermark Type',
+    types: {
+      text: 'Text',
+      logo: 'Logo'
+    },
+    textLabel: 'Watermark Text',
+    textPlaceholder: 'Enter watermark text',
+    colorLabel: 'Text Color',
+    fontSizeLabel: 'Font Size (of image width)',
+    logoLabel: 'Logo Image',
+    logoPick: 'Choose local image',
+    logoChange: 'Change',
+    logoClear: 'Remove logo',
+    logoWidthLabel: 'Logo Width (of image width)',
+    logoPrivacyNote: 'The logo is read locally via FileReader and never leaves your device.',
+    positionLabel: 'Position',
+    positions: {
+      topLeft: 'Top left',
+      topCenter: 'Top center',
+      topRight: 'Top right',
+      middleLeft: 'Middle left',
+      middleCenter: 'Center',
+      middleRight: 'Middle right',
+      bottomLeft: 'Bottom left',
+      bottomCenter: 'Bottom center',
+      bottomRight: 'Bottom right'
+    },
+    marginLabel: 'Margin (of image width)',
+    opacityLabel: 'Opacity',
+    tiledLabel: 'Tile across entire image',
+    tiledHint: 'Position is ignored while tiling is on.',
     applyBtn: 'Apply Changes to All Images'
   },
 

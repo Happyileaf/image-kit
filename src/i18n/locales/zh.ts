@@ -61,13 +61,12 @@ export const zhTools: ToolDefinition[] = [
     id: 'watermark',
     name: '添加水印',
     shortDesc: '添加文字或 Logo 图像水印，有效保护原创作品版权。',
-    fullDesc: '为摄影作品或证件打上版权声明、微标或全图平铺防盗防伪水印，支持自由调整透明度与位置。',
+    fullDesc: '在浏览器本地为图片叠加文字或 Logo 水印，支持九宫格锚点定位、透明度调节与斜向平铺模式，水印尺寸随图片宽度等比缩放。',
     category: 'edit',
-    isAvailable: false,
-    badge: '即将上线',
+    isAvailable: true,
     iconName: 'Stamp',
     acceptedFormats: 'image/*',
-    features: ['文字与图片水印', '透明度及平铺平铺密度', '批量批量打标']
+    features: ['文字与 Logo 图片水印', '九宫格锚点定位', '平铺模式与透明度调节', '批量打标']
   },
   {
     id: 'blur',
@@ -298,6 +297,44 @@ export const zh = {
     heightAuto: '按宽度自动计算',
     percentLabel: '缩放百分比',
     presetsLabel: '社媒常用尺寸预设',
+    applyBtn: '将设置重新应用至全部图片'
+  },
+
+  // Watermarker Settings
+  watermarker: {
+    title: '水印设置',
+    badge: '浏览器 Canvas 引擎',
+    typeLabel: '水印类型',
+    types: {
+      text: '文字',
+      logo: 'Logo'
+    },
+    textLabel: '水印文字',
+    textPlaceholder: '请输入水印文字',
+    colorLabel: '文字颜色',
+    fontSizeLabel: '字号（相对图片宽度）',
+    logoLabel: 'Logo 图片',
+    logoPick: '选择本地图片',
+    logoChange: '更换',
+    logoClear: '移除 Logo',
+    logoWidthLabel: 'Logo 宽度（相对图片宽度）',
+    logoPrivacyNote: 'Logo 仅通过 FileReader 在本地读取，绝不离开您的设备。',
+    positionLabel: '位置',
+    positions: {
+      topLeft: '左上',
+      topCenter: '顶部居中',
+      topRight: '右上',
+      middleLeft: '左侧居中',
+      middleCenter: '正中心',
+      middleRight: '右侧居中',
+      bottomLeft: '左下',
+      bottomCenter: '底部居中',
+      bottomRight: '右下'
+    },
+    marginLabel: '边距（相对图片宽度）',
+    opacityLabel: '不透明度',
+    tiledLabel: '平铺整张图片',
+    tiledHint: '开启平铺后将忽略位置设置。',
     applyBtn: '将设置重新应用至全部图片'
   },
 
