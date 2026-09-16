@@ -1,0 +1,451 @@
+import { ToolDefinition } from '../../types';
+
+export const enTools: ToolDefinition[] = [
+  {
+    id: 'compress',
+    name: 'Image Compressor',
+    shortDesc: 'Reduce image size while keeping good visual quality.',
+    fullDesc: 'Intelligently compress JPG, PNG, and WebP images locally using browser canvas compression. Reduce file sizes up to 80% without noticeable degradation.',
+    category: 'essentials',
+    isAvailable: true,
+    iconName: 'Minimize2',
+    acceptedFormats: 'image/jpeg,image/png,image/webp',
+    features: ['Custom quality slider', 'Instant side-by-side comparison', 'Batch compression', 'ZIP export']
+  },
+  {
+    id: 'convert',
+    name: 'Image Converter',
+    shortDesc: 'Convert images between PNG, JPG, WebP, and AVIF formats.',
+    fullDesc: 'Seamlessly convert between modern and standard image formats directly in your browser. Perfect for web optimization and legacy format support.',
+    category: 'essentials',
+    isAvailable: true,
+    iconName: 'Repeat',
+    acceptedFormats: 'image/jpeg,image/png,image/webp,image/avif',
+    features: ['PNG, JPG, WebP & AVIF targets', 'Batch format conversion', 'Quality fine-tuning', 'Preserves transparency']
+  },
+  {
+    id: 'resize',
+    name: 'Resize Image',
+    shortDesc: 'Resize images to exact dimensions or percentage.',
+    fullDesc: 'Scale images to custom pixel dimensions, standard aspect ratios, or percentage scaling with bicubic interpolation.',
+    category: 'essentials',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'Maximize2',
+    acceptedFormats: 'image/*',
+    features: ['Maintain aspect ratio', 'Social media presets', 'Pixel & % modes']
+  },
+  {
+    id: 'crop',
+    name: 'Crop Image',
+    shortDesc: 'Crop images quickly in your browser with fixed aspect ratios.',
+    fullDesc: 'Trim edges, apply 1:1, 16:9, or 4:3 crop boxes, or freeform crop any image on device.',
+    category: 'essentials',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'Crop',
+    acceptedFormats: 'image/*',
+    features: ['Visual bounding box', 'Golden ratio & rule-of-thirds grid', 'Preset ratios']
+  },
+  {
+    id: 'rotate',
+    name: 'Rotate & Flip',
+    shortDesc: 'Rotate 90°/180° or flip images horizontally and vertically.',
+    fullDesc: 'Correct orientation issues or mirror images with zero quality loss directly in the browser.',
+    category: 'edit',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'RotateCw',
+    acceptedFormats: 'image/*',
+    features: ['Lossless rotation', 'Horizontal / vertical flip', 'Batch angle correction']
+  },
+  {
+    id: 'watermark',
+    name: 'Watermark',
+    shortDesc: 'Add text or logo image watermarks to protect your work.',
+    fullDesc: 'Stamp copyright notices, subtle logos, or repeated tile watermarks with custom opacity and positioning.',
+    category: 'edit',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'Stamp',
+    acceptedFormats: 'image/*',
+    features: ['Text & image logo overlay', 'Opacity & tile controls', 'Batch stamping']
+  },
+  {
+    id: 'blur',
+    name: 'Blur & Redact',
+    shortDesc: 'Obscure sensitive text, faces, or credentials on device.',
+    fullDesc: 'Apply local pixelation or Gaussian blur to redact private info before sharing screenshots.',
+    category: 'edit',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'EyeOff',
+    acceptedFormats: 'image/*',
+    features: ['Brush & rectangle redaction', 'Pixelate or blur effects', '100% offline safety']
+  },
+  {
+    id: 'remove-bg',
+    name: 'Remove Background',
+    shortDesc: 'Extract subjects using on-device WebGPU/WASM models.',
+    fullDesc: 'Cut out people, products, and objects with automatic edge detection running completely in browser memory.',
+    category: 'advanced',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'Wand2',
+    acceptedFormats: 'image/*',
+    features: ['Zero cloud inference', 'Transparent PNG export', 'On-device neural model']
+  },
+  {
+    id: 'batch-rename',
+    name: 'Batch Processor',
+    shortDesc: 'Bulk process, optimize, and organize image collections.',
+    fullDesc: 'Apply multiple operations across dozens of images at once and download a clean structured archive.',
+    category: 'advanced',
+    isAvailable: false,
+    badge: 'Coming soon',
+    iconName: 'Layers',
+    acceptedFormats: 'image/*',
+    features: ['Sequential renaming', 'Chained operations', 'ZIP export']
+  }
+];
+
+export const enCategories = [
+  { id: 'all', name: 'All Tools', desc: 'Complete browser-native suite' },
+  { id: 'essentials', name: 'Essentials', desc: 'Compress, convert, resize & crop' },
+  { id: 'edit', name: 'Edit & Protect', desc: 'Rotate, watermark & redact' },
+  { id: 'advanced', name: 'Advanced', desc: 'AI background removal & batch' }
+];
+
+export const en = {
+  // Navigation
+  nav: {
+    tools: 'Tools',
+    essentials: 'Essentials',
+    upcomingTools: 'Upcoming Tools',
+    preview: 'Preview',
+    about: 'About',
+    privacy: 'Privacy',
+    onDevice: '100% On-Device',
+    local: 'Local',
+    allTools: 'All Tools',
+    switchLang: 'Language',
+    versionBadge: 'v1.0',
+    compressDesc: 'Reduce size without quality loss',
+    convertDesc: 'WebP, JPG, PNG & AVIF',
+    roadmap: 'Roadmap',
+    toolActive: 'Active',
+    privacyTooltip: 'All files are processed locally inside your browser'
+  },
+
+  // Theme
+  theme: {
+    label: 'Theme',
+    light: 'Light',
+    dark: 'Dark',
+    system: 'System',
+    switchToLight: 'Switch to Light Mode',
+    switchToDark: 'Switch to Dark Mode',
+    switchToSystem: 'Follow System Appearance',
+    systemActiveLight: 'System (Light)',
+    systemActiveDark: 'System (Dark)'
+  },
+
+  // Hero section
+  hero: {
+    badgeProcessing: '100% Browser-Based Processing',
+    badgeNoAccount: 'No account required',
+    headline: 'Simple image tools. ',
+    headlineUnderline: 'Private by default.',
+    subtitle: 'Compress, convert and edit images directly in your browser. Your files never leave your device.',
+    openCompressor: 'Open Image Compressor',
+    openConverter: 'Format Converter',
+    trySample: 'Try with Sample Image',
+    sampleTooltip: 'Load a high-res sample image to instantly test compression without looking for local files',
+    zeroUploads: 'Zero server uploads',
+    noDataStored: 'No data stored',
+    noLogin: 'No login or signup',
+    runsInMemory: 'Runs in memory'
+  },
+
+  // Tools grid
+  grid: {
+    title: 'Image Processing Suite',
+    subtitle: 'Select a tool to begin. Processing runs in browser memory with zero network latency.',
+    searchPlaceholder: 'Search tools...',
+    readyToUse: 'Ready to use',
+    inDevelopment: 'In Development',
+    openTool: 'Open Tool',
+    allImages: 'All Images',
+    noToolsFound: 'No tools found matching "{query}".',
+    resetFilters: 'Reset filters'
+  },
+
+  // Tool workspace & Header
+  workspace: {
+    breadcrumbTools: 'Tools',
+    filesLoaded: '{count} {label} loaded',
+    fileSingle: 'file',
+    filesPlural: 'files',
+    clientSideNotice: '100% Client-Side:',
+    clientSideDesc: 'Your images never leave your browser.',
+    totalOriginal: 'Total Original:',
+    totalResult: 'Total Result:',
+    percentSmaller: '{percent}% smaller',
+    clearAll: 'Clear All',
+    batchOperations: 'Batch Operations',
+    downloadZip: 'Download All ({count}) as ZIP',
+    generatingZip: 'Generating ZIP...',
+    archiveBuiltOnDevice: 'Archive built on-device',
+    readyCount: '{ready}/{total} ready'
+  },
+
+  // Upload Zone
+  upload: {
+    dragOver: 'Release to drop images',
+    defaultTitle: 'Drop images here, or browse files',
+    subText: 'Supports PNG, JPG, WebP, AVIF • Up to 50MB per file • Batch processing supported',
+    selectBtn: 'Select Images from Device',
+    processedLocally: 'Processed locally in your browser',
+    pasteTip: 'Paste anywhere (Ctrl+V)',
+    sampleHeader: "Don't have an image ready? Test with high-resolution sample photos:",
+    generating: 'Generating...',
+    sampleMountain: 'Alpine Lake (1600×1000)',
+    sampleSunset: 'Sunset Gradient (1600×1000)',
+    compactDrop: 'Add more images (drop or click)'
+  },
+
+  // Compressor Settings
+  compressor: {
+    title: 'Compression Settings',
+    badge: 'Client-side Canvas',
+    qualityLabel: 'Image Quality',
+    presets: {
+      maxSavings: 'Max Savings',
+      maxSavingsDesc: 'Smallest file size',
+      balanced: 'Balanced',
+      balancedDesc: 'Recommended default',
+      highFidelity: 'High Fidelity',
+      highFidelityDesc: 'Near lossless visual'
+    },
+    outputFormat: 'Output Format',
+    formatKeep: 'Keep Original',
+    formatWebp: 'Convert to WebP',
+    formatJpg: 'Convert to JPG',
+    maxDimension: 'Max Resolution / Scale',
+    aspectRatioNote: 'Maintains aspect ratio',
+    dimOriginal: 'Original',
+    applyBtn: 'Apply Changes to All Images'
+  },
+
+  // Converter Settings
+  converter: {
+    title: 'Target Format',
+    badge: 'Instant In-Browser',
+    selectFormatLabel: 'Select Output Format',
+    formats: {
+      webp: {
+        tag: 'Recommended',
+        desc: 'Modern web standard, 25-35% smaller than JPEG with alpha transparency'
+      },
+      jpeg: {
+        tag: 'Universal',
+        desc: 'High compatibility across all devices, cameras, and printers'
+      },
+      png: {
+        tag: 'Lossless',
+        desc: 'Crystal clear graphics, logos, and screenshots with full transparency'
+      },
+      avif: {
+        tag: 'Next-Gen',
+        desc: 'State-of-the-art compression efficiency for modern browsers'
+      }
+    },
+    qualityLabel: 'Compression Quality ({format})',
+    smallestSize: 'Smallest size (20%)',
+    balancedQuality: 'Balanced (80%)',
+    maxQuality: 'Max quality (100%)',
+    pngLosslessNote: 'PNG is a lossless format: Full original clarity and alpha transparency will be preserved at pixel perfection.',
+    convertAllBtn: 'Convert All to {format}'
+  },
+
+  // File Item & List
+  files: {
+    loadedTitle: 'Loaded Images ({count})',
+    optimizedCount: '{completed} of {total} optimized',
+    processing: 'Processing in browser...',
+    done: 'Done',
+    smaller: '-{percent}% smaller',
+    originalQuality: 'Original quality',
+    compareTooltip: 'Compare Before & After',
+    saveBtn: 'Save',
+    removeTooltip: 'Remove from list',
+    failedToProcess: 'Failed to process'
+  },
+  fileItem: {
+    done: 'Done',
+    processingFailed: 'Failed to process',
+    processingInBrowser: 'Processing in browser...',
+    percentSmaller: '-{percent}% smaller',
+    originalQuality: 'Original quality',
+    inspectTitle: 'Compare Before & After',
+    downloadTitle: 'Download file',
+    saveBtn: 'Save',
+    removeTitle: 'Remove from list'
+  },
+  fileList: {
+    loadedImages: 'Loaded Images ({count})',
+    optimizedCount: '{completed} of {total} optimized'
+  },
+
+  // Comparison Modal
+  modal: {
+    title: 'Quality Comparison: {name}',
+    smallerBadge: '{percent}% smaller',
+    processedBadge: 'Processed',
+    splitSlider: 'Split Slider',
+    sideBySide: 'Side by Side',
+    original: 'Original',
+    optimized: 'Optimized',
+    savings: 'Savings:',
+    close: 'Close',
+    downloadFile: 'Download File',
+    sliderAria: 'Comparison slider'
+  },
+  comparison: {
+    title: 'Quality Comparison: {name}',
+    smallerBadge: '-{percent}% smaller',
+    processedBadge: 'Processed',
+    splitSlider: 'Split Slider',
+    sideBySide: 'Side by Side',
+    originalLabel: 'Original ({size})',
+    optimizedLabel: 'Optimized ({size})',
+    originalTitle: 'Original',
+    optimizedTitle: 'Optimized',
+    originalLabelShort: 'Original',
+    resultLabelShort: 'Optimized',
+    processingText: 'Processing...',
+    savingsLabel: 'Savings',
+    closeBtn: 'Close',
+    downloadBtn: 'Download'
+  },
+
+  // About Page
+  about: {
+    manifestoBadge: 'Product Manifesto',
+    title: 'Why ImageKit?',
+    subtitle: 'Every day, millions of people upload personal photos, receipts, ID cards, and proprietary graphics to random online conversion websites. We built ImageKit to change that.',
+    pillars: [
+      {
+        title: '1. Privacy First',
+        desc: 'Your images never leave your device. All calculations, compression transforms, and format conversions take place inside your browser’s sandbox memory via HTML5 Canvas and Web APIs.'
+      },
+      {
+        title: '2. No Account Needed',
+        desc: 'No signups, passwords, email verification, or subscription paywalls. Open the website, drop your photos, optimize them, and close the tab when you are done.'
+      },
+      {
+        title: '3. Native Browser Compute',
+        desc: 'Modern browsers are extraordinarily powerful. By leveraging your own device’s GPU and multi-core CPU, processing happens instantly with zero network upload latency.'
+      },
+      {
+        title: '4. Fast & Simple',
+        desc: 'No intrusive ads, popups, cookie consent banners, or fake download buttons. Just a clean, high-performance workspace designed for creative workflows.'
+      }
+    ],
+    tableTitle: 'How ImageKit Compares',
+    tableHeaders: {
+      feature: 'Feature',
+      traditional: 'Traditional Online Tools',
+      imagekit: 'ImageKit'
+    },
+    tableRows: [
+      {
+        feature: 'Server Uploads',
+        traditional: 'Uploads all photos to remote cloud',
+        imagekit: 'Zero bytes sent to server (100% Local)'
+      },
+      {
+        feature: 'Login & Registration',
+        traditional: 'Required or frequent prompts',
+        imagekit: 'Never required'
+      },
+      {
+        feature: 'File Size Limitations',
+        traditional: 'Strict 5MB / 10MB limits unless paid',
+        imagekit: 'Unlimited (bound only by device RAM)'
+      },
+      {
+        feature: 'Processing Speed',
+        traditional: 'Delayed by network upload & cloud queue',
+        imagekit: 'Instant native execution'
+      },
+      {
+        feature: 'Offline Usability',
+        traditional: 'Fails without internet connection',
+        imagekit: 'Works completely offline'
+      }
+    ],
+    ctaTitle: 'Experience the difference today',
+    ctaSubtitle: 'Try compressing an image right now in seconds.',
+    ctaBtn: 'Open Image Compressor'
+  },
+
+  // Privacy Page
+  privacy: {
+    badge: 'Privacy by Architecture',
+    title: 'Your images stay on your device.',
+    subtitle: 'We believe privacy should not be a promise hidden in legal fine print. It should be built directly into the software architecture.',
+    guarantees: [
+      {
+        title: 'Where does image processing happen?',
+        desc: 'Every byte of image compression and format conversion occurs entirely inside your browser’s isolated memory heap. We use modern browser canvas interfaces (HTMLCanvasElement and canvas.toBlob) alongside client-side Web APIs.'
+      },
+      {
+        title: 'Are images ever uploaded or stored?',
+        desc: 'Never. There is no backend image storage, no Amazon S3 bucket, no Cloudinary pipeline, and no remote server queue. When you drag a photo into ImageKit, the browser creates a local blob: reference. When you close or refresh the tab, that memory is automatically reclaimed by your operating system.'
+      },
+      {
+        title: 'Do you track user activity or analytics?',
+        desc: 'No. We do not use third-party user tracking scripts, advertising pixels, or analytics trackers. You do not need to register, provide an email address, or consent to cookie profiles.'
+      }
+    ],
+    verifyBadge: 'Independent Verification',
+    verifyTitle: 'How to verify that your images never leave your computer',
+    verifySubtitle: 'You don’t have to take our word for it. Any modern web browser allows you to inspect all network traffic in real time:',
+    steps: [
+      'Open Developer Tools by pressing F12 (or Cmd + Option + I on macOS).',
+      'Switch to the Network tab in DevTools.',
+      'Drop an image into ImageKit and adjust compression or format settings.',
+      'Notice that zero upload (POST/PUT) requests appear in the Network tab. You can even disconnect your Wi-Fi or turn on Airplane Mode and the tools continue working seamlessly!'
+    ],
+    ctaPrompt: 'Ready to test with complete peace of mind?',
+    ctaBtn: 'Start Compressing'
+  },
+
+  // Footer
+  footer: {
+    tagline: 'A private-by-default image toolkit designed to run 100% locally in your browser. No uploads, no servers, no accounts. Your photos stay strictly on your device.',
+    brandDesc: 'A private-by-default image toolkit designed to run 100% locally in your browser. No uploads, no servers, no accounts. Your photos stay strictly on your device.',
+    zeroCloud: 'Zero Cloud Storage',
+    noCookies: 'No Cookies or Login',
+    nativeWeb: 'Native Web APIs',
+    nativeApis: 'Native Web APIs',
+    toolsHeader: 'Tools',
+    toolsHeading: 'Tools',
+    principlesHeader: 'Principles',
+    principlesHeading: 'Principles',
+    compressor: 'Image Compressor',
+    converter: 'Format Converter',
+    resize: 'Resize Image',
+    crop: 'Crop Image',
+    watermark: 'Watermark & Redact',
+    privacyArchitecture: 'Privacy Architecture',
+    whyLocal: 'Why Local Processing?',
+    verifyF12: 'Verify in DevTools (F12)',
+    verifyDevTools: 'Verify in DevTools (F12)',
+    soonBadge: 'Soon',
+    soon: 'Soon',
+    copyright: '© {year} ImageKit. Open prototype for browser-native media processing.',
+    securityMotto: 'Privacy First • Zero Telemetry • 100% Client-Side'
+  }
+};

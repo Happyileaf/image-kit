@@ -1,0 +1,6 @@
+{
+  "name": "ImageKit",
+  "description": "Fast, privacy-first image tools running locally in your browser. Compress and convert images with zero server uploads.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
