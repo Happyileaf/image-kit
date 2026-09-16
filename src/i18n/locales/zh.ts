@@ -38,13 +38,12 @@ export const zhTools: ToolDefinition[] = [
     id: 'crop',
     name: '裁剪图片',
     shortDesc: '在浏览器中按自由或固定比例快速裁剪图片。',
-    fullDesc: '自由修剪画面边缘，支持 1:1 正方形、16:9 宽屏及 4:3 等常用构图比例裁剪。',
+    fullDesc: '通过可视化选区编辑器自由修剪画面边缘，支持自由比例及 1:1、4:3、3:2、16:9 常用构图比例，全程本地 Canvas 处理。',
     category: 'essentials',
-    isAvailable: false,
-    badge: '即将上线',
+    isAvailable: true,
     iconName: 'Crop',
     acceptedFormats: 'image/*',
-    features: ['可视化选区边框', '黄金比例与三分法辅助线', '丰富比例预设']
+    features: ['可视化选区编辑器', '三分构图辅助线', '自由与预设比例', '批量裁剪']
   },
   {
     id: 'rotate',
@@ -336,6 +335,34 @@ export const zh = {
     tiledLabel: '平铺整张图片',
     tiledHint: '开启平铺后将忽略位置设置。',
     applyBtn: '将设置重新应用至全部图片'
+  },
+
+  // Cropper Settings
+  cropper: {
+    title: '裁剪设置',
+    badge: '客户端 Canvas',
+    aspectLabel: '宽高比',
+    aspects: {
+      free: '自由',
+      ratio1x1: '1:1',
+      ratio4x3: '4:3',
+      ratio3x2: '3:2',
+      ratio16x9: '16:9'
+    },
+    regionLabel: '裁剪选区',
+    regionInfo: 'X {x}% · Y {y}% · 宽 {width}% · 高 {height}%',
+    editRegionBtn: '可视化编辑选区',
+    noFileHint: '请先添加图片，再编辑裁剪选区。',
+    applyBtn: '将裁剪应用至全部图片'
+  },
+
+  // Shared Region Editor
+  regionEditor: {
+    title: '编辑选区',
+    sizeBadge: '{width} × {height} 像素',
+    hint: '在图片上拖拽绘制选区，框内拖拽移动，拖动手柄缩放。',
+    cancel: '取消',
+    apply: '应用选区'
   },
 
   // File Item & List

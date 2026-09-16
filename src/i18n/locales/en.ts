@@ -38,13 +38,12 @@ export const enTools: ToolDefinition[] = [
     id: 'crop',
     name: 'Crop Image',
     shortDesc: 'Crop images quickly in your browser with fixed aspect ratios.',
-    fullDesc: 'Trim edges, apply 1:1, 16:9, or 4:3 crop boxes, or freeform crop any image on device.',
+    fullDesc: 'Trim edges with a visual region editor, apply freeform or 1:1, 4:3, 3:2, 16:9 crop boxes, all rendered locally on canvas.',
     category: 'essentials',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'Crop',
     acceptedFormats: 'image/*',
-    features: ['Visual bounding box', 'Golden ratio & rule-of-thirds grid', 'Preset ratios']
+    features: ['Visual region editor', 'Rule-of-thirds grid', 'Free & preset ratios', 'Batch cropping']
   },
   {
     id: 'rotate',
@@ -336,6 +335,34 @@ export const en = {
     tiledLabel: 'Tile across entire image',
     tiledHint: 'Position is ignored while tiling is on.',
     applyBtn: 'Apply Changes to All Images'
+  },
+
+  // Cropper Settings
+  cropper: {
+    title: 'Crop Settings',
+    badge: 'Client-side Canvas',
+    aspectLabel: 'Aspect Ratio',
+    aspects: {
+      free: 'Free',
+      ratio1x1: '1:1',
+      ratio4x3: '4:3',
+      ratio3x2: '3:2',
+      ratio16x9: '16:9'
+    },
+    regionLabel: 'Crop Region',
+    regionInfo: 'X {x}% · Y {y}% · W {width}% · H {height}%',
+    editRegionBtn: 'Edit region visually',
+    noFileHint: 'Add an image first to edit the crop region.',
+    applyBtn: 'Apply Crop to All Images'
+  },
+
+  // Shared Region Editor
+  regionEditor: {
+    title: 'Edit Region',
+    sizeBadge: '{width} × {height} px',
+    hint: 'Drag on the image to draw a region, drag inside to move, use handles to resize.',
+    cancel: 'Cancel',
+    apply: 'Apply Region'
   },
 
   // File Item & List

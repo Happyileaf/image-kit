@@ -38,13 +38,12 @@ export const TOOLS: ToolDefinition[] = [
     id: 'crop',
     name: 'Crop Image',
     shortDesc: 'Crop images quickly in your browser with fixed aspect ratios.',
-    fullDesc: 'Trim edges, apply 1:1, 16:9, or 4:3 crop boxes, or freeform crop any image on device.',
+    fullDesc: 'Trim edges with a visual region editor, apply freeform or 1:1, 4:3, 3:2, 16:9 crop boxes, all rendered locally on canvas.',
     category: 'essentials',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'Crop',
     acceptedFormats: 'image/*',
-    features: ['Visual bounding box', 'Golden ratio & rule-of-thirds grid', 'Preset ratios']
+    features: ['Visual region editor', 'Rule-of-thirds grid', 'Free & preset ratios', 'Batch cropping']
   },
   {
     id: 'rotate',

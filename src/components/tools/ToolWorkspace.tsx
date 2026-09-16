@@ -267,6 +267,7 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
                 onApply={handleReprocessAll}
                 isProcessing={isProcessing}
                 itemCount={items.length}
+                representativeItem={items[0]}
               />
 
               {/* Bulk Download Panel */}
