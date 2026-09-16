@@ -9,26 +9,20 @@ import {
   ShieldCheck,
   RotateCcw
 } from 'lucide-react';
-import { 
-  CompressOptions, 
-  ConvertOptions, 
-  ProcessedFileItem, 
-  ToolDefinition, 
-  ToolId 
+import {
+  ProcessedFileItem,
+  ToolDefinition
 } from '../../types';
-import { 
-  readImageFile, 
-  compressImage, 
-  convertImage, 
-  formatBytes, 
-  downloadAllAsZip 
+import {
+  readImageFile,
+  formatBytes,
+  downloadAllAsZip
 } from '../../utils/imageProcessor';
+import { getToolModule } from '../../modules';
 import { useI18n } from '../../i18n/context';
 import { ToolHeader } from './ToolHeader';
 import { UploadZone } from './UploadZone';
 import { FileList } from './FileList';
-import { CompressorSettings } from './CompressorSettings';
-import { ConverterSettings } from './ConverterSettings';
 import { ComparisonModal } from './ComparisonModal';
 
 interface ToolWorkspaceProps {
@@ -44,18 +38,11 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
   const [isZipping, setIsZipping] = useState(false);
   const { t } = useI18n();
 
-  // Compressor default options
-  const [compressOptions, setCompressOptions] = useState<CompressOptions>({
-    quality: 80,
-    format: 'keep',
-    maxWidthOrHeight: 0,
-  });
+  // Resolve the registered module for the current tool
+  const toolModule = getToolModule(tool.id) ?? getToolModule('compress')!;
 
-  // Converter default options
-  const [convertOptions, setConvertOptions] = useState<ConvertOptions>({
-    targetFormat: 'image/webp',
-    quality: 80,
-  });
+  // Tool options, initialized from the module's defaults
+  const [options, setOptions] = useState(toolModule.defaultOptions);
 
   // Process a batch of items
   const processItems = useCallback(
@@ -69,45 +56,24 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
         );
 
         try {
-          if (tool.id === 'compress') {
-            const res = await compressImage(item, compressOptions);
-            setItems((prev) =>
-              prev.map((it) =>
-                it.id === item.id
-                  ? {
-                      ...it,
-                      status: 'done',
-                      resultBlob: res.blob,
-                      resultUrl: res.url,
-                      resultSize: res.size,
-                      resultWidth: res.width,
-                      resultHeight: res.height,
-                      resultType: res.format,
-                      savedPercentage: res.savedPercentage,
-                    }
-                  : it
-              )
-            );
-          } else if (tool.id === 'convert') {
-            const res = await convertImage(item, convertOptions);
-            setItems((prev) =>
-              prev.map((it) =>
-                it.id === item.id
-                  ? {
-                      ...it,
-                      status: 'done',
-                      resultBlob: res.blob,
-                      resultUrl: res.url,
-                      resultSize: res.size,
-                      resultWidth: res.width,
-                      resultHeight: res.height,
-                      resultType: res.format,
-                      savedPercentage: res.savedPercentage,
-                    }
-                  : it
-              )
-            );
-          }
+          const res = await toolModule.processor(item, options);
+          setItems((prev) =>
+            prev.map((it) =>
+              it.id === item.id
+                ? {
+                    ...it,
+                    status: 'done',
+                    resultBlob: res.blob,
+                    resultUrl: res.url,
+                    resultSize: res.size,
+                    resultWidth: res.width,
+                    resultHeight: res.height,
+                    resultType: res.format,
+                    savedPercentage: res.savedPercentage,
+                  }
+                : it
+            )
+          );
         } catch (err: any) {
           console.error('Processing error on file:', item.name, err);
           setItems((prev) =>
@@ -126,7 +92,7 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
 
       setIsProcessing(false);
     },
-    [tool.id, compressOptions, convertOptions]
+    [toolModule, options]
   );
 
   // Handle incoming new files
@@ -294,28 +260,14 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
 
             {/* Right Column (4 cols): Settings & Action Panel */}
             <div className="lg:col-span-4 space-y-6 sticky top-24">
-              {/* Settings based on current tool */}
-              {tool.id === 'compress' ? (
-                <CompressorSettings
-                  options={compressOptions}
-                  onChange={(newOpts) => {
-                    setCompressOptions(newOpts);
-                  }}
-                  onApply={handleReprocessAll}
-                  isProcessing={isProcessing}
-                  itemCount={items.length}
-                />
-              ) : (
-                <ConverterSettings
-                  options={convertOptions}
-                  onChange={(newOpts) => {
-                    setConvertOptions(newOpts);
-                  }}
-                  onApply={handleReprocessAll}
-                  isProcessing={isProcessing}
-                  itemCount={items.length}
-                />
-              )}
+              {/* Settings panel resolved from the tool module registry */}
+              <toolModule.SettingsPanel
+                options={options}
+                onChange={setOptions}
+                onApply={handleReprocessAll}
+                isProcessing={isProcessing}
+                itemCount={items.length}
+              />
 
               {/* Bulk Download Panel */}
               <div className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-5 shadow-xs space-y-4">

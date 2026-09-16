@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { PageView, ToolId } from './types';
 import { I18nProvider, useI18n } from './i18n/context';
 import { ThemeProvider } from './theme/context';
@@ -60,11 +60,15 @@ function AppContent() {
         )}
 
         {currentView.type === 'tool' && activeTool && (
-          <ToolWorkspace
-            tool={activeTool}
-            onBack={() => handleNavigate({ type: 'home' })}
-            initialFiles={initialFilesForTool}
-          />
+          // Keyed fragment forces a full remount of the workspace when switching tools,
+          // resetting all per-tool state (keyed directly on ToolWorkspace is blocked by missing @types/react)
+          <Fragment key={activeTool.id}>
+            <ToolWorkspace
+              tool={activeTool}
+              onBack={() => handleNavigate({ type: 'home' })}
+              initialFiles={initialFilesForTool}
+            />
+          </Fragment>
         )}
 
         {currentView.type === 'about' && (
