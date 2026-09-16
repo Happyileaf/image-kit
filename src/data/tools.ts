@@ -71,13 +71,12 @@ export const TOOLS: ToolDefinition[] = [
     id: 'blur',
     name: 'Blur & Redact',
     shortDesc: 'Obscure sensitive text, faces, or credentials on device.',
-    fullDesc: 'Apply local pixelation or Gaussian blur to redact private info before sharing screenshots.',
+    fullDesc: 'Draw rectangle regions over sensitive info and obscure them with pixelation or Gaussian blur, processed entirely on local canvas before you share screenshots.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'EyeOff',
     acceptedFormats: 'image/*',
-    features: ['Brush & rectangle redaction', 'Pixelate or blur effects', '100% offline safety']
+    features: ['Rectangle region redaction', 'Pixelate or Gaussian blur', 'Strength fine-tuning', '100% offline safety']
   },
   {
     id: 'remove-bg',

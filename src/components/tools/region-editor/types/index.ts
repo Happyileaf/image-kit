@@ -25,6 +25,12 @@ export type RegionResizeHandle = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | '
 export type RegionDragMode = 'create' | 'move' | 'resize';
 
 /**
+ * 选区编辑器交互模式类型
+ * single 为单区域模式（裁剪等场景），multi 为多区域模式（打码遮盖等场景）
+ */
+export type RegionEditorMode = 'single' | 'multi';
+
+/**
  * 选区拖拽会话接口
  * 记录一次 pointerdown 到 pointerup 之间的拖拽上下文
  */
@@ -49,12 +55,20 @@ export interface RegionDragSession {
 export interface RegionEditorProps {
   /** 代表图片地址（本地 Object URL，绝不上传） */
   imageUrl: string;
-  /** 比例锁定模式，仅作为编辑器内的交互约束 */
+  /** 比例锁定模式，仅作为编辑器内的交互约束；多区域模式下忽略 */
   aspect: CropAspectEnum;
-  /** 打开编辑器时的初始选区（归一化坐标） */
+  /** 打开编辑器时的初始选区（归一化坐标），单区域模式使用 */
   initialRegion: NormalizedRect;
-  /** 确认选区回调，输出归一化矩形 */
+  /** 确认选区回调，输出归一化矩形，单区域模式使用 */
   onApply: (region: NormalizedRect) => void;
   /** 取消编辑回调 */
   onCancel: () => void;
+  /** 交互模式，默认 single 单区域 */
+  mode?: RegionEditorMode;
+  /** 多区域模式的初始选区数组（归一化坐标） */
+  initialRegions?: NormalizedRect[];
+  /** 多区域模式的确认回调，输出全部归一化选区（允许空数组） */
+  onApplyRegions?: (regions: NormalizedRect[]) => void;
+  /** 是否显示三分构图线，默认 true；多区域打码场景传 false */
+  showGrid?: boolean;
 }
