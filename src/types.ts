@@ -1,4 +1,5 @@
 import { RotateAngleEnum } from './constants/rotate-angle';
+import { ResizeModeEnum } from './constants/resize-mode';
 
 export type ToolId = 
   | 'compress'
@@ -66,6 +67,15 @@ export interface RotateOptions {
   angle: RotateAngleEnum; // clockwise rotation angle
   flipHorizontal: boolean;
   flipVertical: boolean;
+}
+
+export interface ResizeOptions {
+  mode: ResizeModeEnum; // pixel-based or percentage-based resizing
+  width: number; // target width in pixels (pixels mode)
+  height: number; // target height in pixels (pixels mode, used when aspect lock is off)
+  percent: number; // scale percentage (percent mode), 10 to 200
+  lockAspect: boolean; // when locked, height is derived from width per-image aspect ratio
+  quality: number; // 1 to 100 (for lossy output formats)
 }
 
 export type PageView = 

@@ -27,13 +27,12 @@ export const TOOLS: ToolDefinition[] = [
     id: 'resize',
     name: 'Resize Image',
     shortDesc: 'Resize images to exact dimensions or percentage.',
-    fullDesc: 'Scale images to custom pixel dimensions, standard aspect ratios, or percentage scaling with bicubic interpolation.',
+    fullDesc: 'Scale images to exact pixel dimensions or a percentage of the original, entirely in your browser. Multi-step downsampling keeps large reductions clean, with aspect-ratio lock and social media presets.',
     category: 'essentials',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'Maximize2',
     acceptedFormats: 'image/*',
-    features: ['Maintain aspect ratio', 'Social media presets', 'Pixel & % modes']
+    features: ['Pixel & percentage modes', 'Aspect ratio lock', 'Social media presets', 'Multi-step downsampling']
   },
   {
     id: 'crop',

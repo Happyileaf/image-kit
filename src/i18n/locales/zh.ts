@@ -27,13 +27,12 @@ export const zhTools: ToolDefinition[] = [
     id: 'resize',
     name: '调整尺寸',
     shortDesc: '按指定像素宽高或百分比精确缩放图片。',
-    fullDesc: '采用双三次插值算法缩放图像尺寸，支持固定像素、比例锁定及社交媒体常用规格预设。',
+    fullDesc: '在浏览器本地按精确像素或百分比缩放图片，大幅缩小时采用多步降采样保持画质，支持宽高比锁定与社媒常用尺寸预设。',
     category: 'essentials',
-    isAvailable: false,
-    badge: '即将上线',
+    isAvailable: true,
     iconName: 'Maximize2',
     acceptedFormats: 'image/*',
-    features: ['等比例锁定', '常用社媒尺寸预设', '像素与百分比模式']
+    features: ['像素与百分比模式', '宽高比锁定', '社媒尺寸预设', '多步降采样保真']
   },
   {
     id: 'crop',
@@ -281,6 +280,24 @@ export const zh = {
     flipLabel: '镜像翻转',
     flipHorizontal: '水平翻转',
     flipVertical: '垂直翻转',
+    applyBtn: '将设置重新应用至全部图片'
+  },
+
+  // Resizer Settings
+  resizer: {
+    title: '尺寸调整设置',
+    badge: '浏览器 Canvas 引擎',
+    modeLabel: '缩放模式',
+    modes: {
+      pixels: '像素',
+      percent: '百分比'
+    },
+    widthLabel: '宽度 (px)',
+    heightLabel: '高度 (px)',
+    lockAspect: '锁定宽高比',
+    heightAuto: '按宽度自动计算',
+    percentLabel: '缩放百分比',
+    presetsLabel: '社媒常用尺寸预设',
     applyBtn: '将设置重新应用至全部图片'
   },
 
