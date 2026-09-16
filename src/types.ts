@@ -1,5 +1,7 @@
 import { RotateAngleEnum } from './constants/rotate-angle';
 import { ResizeModeEnum } from './constants/resize-mode';
+import { WatermarkTypeEnum } from './constants/watermark-type';
+import { WatermarkPositionEnum } from './constants/watermark-position';
 
 export type ToolId = 
   | 'compress'
@@ -76,6 +78,19 @@ export interface ResizeOptions {
   percent: number; // scale percentage (percent mode), 10 to 200
   lockAspect: boolean; // when locked, height is derived from width per-image aspect ratio
   quality: number; // 1 to 100 (for lossy output formats)
+}
+
+export interface WatermarkOptions {
+  type: WatermarkTypeEnum; // watermark source type (text or logo image)
+  text: string; // watermark text content (text type)
+  color: string; // watermark text color (text type)
+  fontSizeRatio: number; // font size relative to image width (e.g. 0.05)
+  logoDataUrl: string | null; // logo image data URL read locally via FileReader (logo type), never uploaded
+  logoWidthRatio: number; // logo width relative to image width (e.g. 0.15)
+  position: WatermarkPositionEnum; // 9-anchor placement, ignored when tiled
+  marginRatio: number; // margin from anchor edges relative to image width
+  opacity: number; // 0 to 100
+  tiled: boolean; // when true, watermark repeats in a rotated grid over the whole image
 }
 
 export type PageView = 

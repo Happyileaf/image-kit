@@ -4,6 +4,7 @@ import { compressModule } from './compress';
 import { convertModule } from './convert';
 import { rotateModule } from './rotate';
 import { resizeModule } from './resize';
+import { watermarkModule } from './watermark';
 
 /**
  * 工具模块注册表
@@ -18,6 +19,8 @@ export const TOOL_MODULES: Partial<Record<ToolId, ToolModule<any>>> = {
   rotate: rotateModule,
   /** 图片尺寸调整工具模块 */
   resize: resizeModule,
+  /** 图片水印工具模块 */
+  watermark: watermarkModule,
 };
 
 /**

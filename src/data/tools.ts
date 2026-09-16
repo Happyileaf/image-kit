@@ -61,13 +61,12 @@ export const TOOLS: ToolDefinition[] = [
     id: 'watermark',
     name: 'Watermark',
     shortDesc: 'Add text or logo image watermarks to protect your work.',
-    fullDesc: 'Stamp copyright notices, subtle logos, or repeated tile watermarks with custom opacity and positioning.',
+    fullDesc: 'Stamp text or logo watermarks with 9-anchor positioning, adjustable opacity, and an optional tiled mode — all rendered locally on canvas, sized relative to each image.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'Stamp',
     acceptedFormats: 'image/*',
-    features: ['Text & image logo overlay', 'Opacity & tile controls', 'Batch stamping']
+    features: ['Text & logo watermarks', '9-anchor grid positioning', 'Tiled mode & opacity control', 'Batch stamping']
   },
   {
     id: 'blur',
