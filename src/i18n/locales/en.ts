@@ -536,6 +536,10 @@ export const en = {
       'Drop an image into ImageKit and adjust compression or format settings.',
       'Notice that zero upload (POST/PUT) requests appear in the Network tab. You can even disconnect your Wi-Fi or turn on Airplane Mode and the tools continue working seamlessly!'
     ],
+    openSourceTitle: 'Built in the Open',
+    openSourceDesc: 'ImageKit is fully open source. Every step of the image processing pipeline lives in public code — take a look, poke around, and see exactly how local processing works under the hood.',
+    openSourceContribute: 'Spotted a bug or have an idea? Open an issue, send a PR, and help make it better.',
+    openSourceCta: 'View on GitHub',
     ctaPrompt: 'Ready to test with complete peace of mind?',
     ctaBtn: 'Start Compressing'
   },
@@ -561,6 +565,7 @@ export const en = {
     whyLocal: 'Why Local Processing?',
     verifyF12: 'Verify in DevTools (F12)',
     verifyDevTools: 'Verify in DevTools (F12)',
+    openSource: 'Open Source (GitHub)',
     soonBadge: 'Soon',
     soon: 'Soon',
     copyright: '© {year} ImageKit. Open prototype for browser-native media processing.',

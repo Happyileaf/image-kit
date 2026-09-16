@@ -536,6 +536,10 @@ export const zh = {
       '将任意图片拖入 ImageKit 并调整压缩比例或目标格式。',
       '仔细观察网络面板：完全没有任何 POST、PUT 等图片文件上传请求。您甚至可以断开 Wi-Fi 或开启飞行模式，工具依然畅快运行！'
     ],
+    openSourceTitle: '开源共建',
+    openSourceDesc: 'ImageKit 完全开源。图片处理的每一步实现都写在公开的代码里——欢迎随时翻阅、审视，看看本地处理在底层究竟是如何工作的。',
+    openSourceContribute: '发现 Bug 或有好点子？欢迎提 Issue、提 PR，一起把它做得更好。',
+    openSourceCta: '在 GitHub 查看代码',
     ctaPrompt: '准备好毫无顾虑地处理您的照片了吗？',
     ctaBtn: '立即开始体验压缩'
   },
@@ -561,6 +565,7 @@ export const zh = {
     whyLocal: '为什么坚持本地运算？',
     verifyF12: '按 F12 自主验证流量',
     verifyDevTools: '按 F12 自主验证流量',
+    openSource: '开源代码（GitHub）',
     soonBadge: '即将上线',
     soon: '即将上线',
     copyright: '© {year} ImageKit • 纯浏览器原生媒体处理套件',
