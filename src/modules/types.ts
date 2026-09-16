@@ -37,6 +37,8 @@ export interface SettingsPanelProps<O> {
   isProcessing: boolean;
   /** 当前文件数量 */
   itemCount: number;
+  /** 列表首张代表图，供需要可视化编辑原图的工具（如裁剪）使用；无文件时为 undefined */
+  representativeItem?: ProcessedFileItem;
 }
 
 /**

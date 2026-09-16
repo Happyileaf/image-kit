@@ -2,6 +2,7 @@ import { RotateAngleEnum } from './constants/rotate-angle';
 import { ResizeModeEnum } from './constants/resize-mode';
 import { WatermarkTypeEnum } from './constants/watermark-type';
 import { WatermarkPositionEnum } from './constants/watermark-position';
+import { CropAspectEnum } from './constants/crop-aspect';
 
 export type ToolId = 
   | 'compress'
@@ -91,6 +92,18 @@ export interface WatermarkOptions {
   marginRatio: number; // margin from anchor edges relative to image width
   opacity: number; // 0 to 100
   tiled: boolean; // when true, watermark repeats in a rotated grid over the whole image
+}
+
+export interface NormalizedRect {
+  x: number; // left edge, 0 to 1 relative to image width
+  y: number; // top edge, 0 to 1 relative to image height
+  width: number; // 0 to 1 relative to image width
+  height: number; // 0 to 1 relative to image height
+}
+
+export interface CropOptions {
+  region: NormalizedRect; // single source of truth for the crop area, applied to every image in the batch
+  aspect: CropAspectEnum; // aspect lock used as an interaction constraint inside the region editor
 }
 
 export type PageView = 
