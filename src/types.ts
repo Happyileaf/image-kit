@@ -1,3 +1,5 @@
+import { RotateAngleEnum } from './constants/rotate-angle';
+
 export type ToolId = 
   | 'compress'
   | 'convert'
@@ -58,6 +60,12 @@ export type TargetFormat = 'image/webp' | 'image/jpeg' | 'image/png' | 'image/av
 export interface ConvertOptions {
   targetFormat: TargetFormat;
   quality: number; // 1 to 100 (for lossy formats)
+}
+
+export interface RotateOptions {
+  angle: RotateAngleEnum; // clockwise rotation angle
+  flipHorizontal: boolean;
+  flipVertical: boolean;
 }
 
 export type PageView = 

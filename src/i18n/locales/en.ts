@@ -50,14 +50,13 @@ export const enTools: ToolDefinition[] = [
   {
     id: 'rotate',
     name: 'Rotate & Flip',
-    shortDesc: 'Rotate 90°/180° or flip images horizontally and vertically.',
-    fullDesc: 'Correct orientation issues or mirror images with zero quality loss directly in the browser.',
+    shortDesc: 'Rotate 90°/180°/270° or flip images horizontally and vertically.',
+    fullDesc: 'Correct orientation issues or mirror images directly in the browser with high-quality local re-encoding.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'RotateCw',
     acceptedFormats: 'image/*',
-    features: ['Lossless rotation', 'Horizontal / vertical flip', 'Batch angle correction']
+    features: ['90°/180°/270° rotation', 'Horizontal / vertical flip', 'Batch angle correction']
   },
   {
     id: 'watermark',
@@ -266,6 +265,23 @@ export const en = {
     maxQuality: 'Max quality (100%)',
     pngLosslessNote: 'PNG is a lossless format: Full original clarity and alpha transparency will be preserved at pixel perfection.',
     convertAllBtn: 'Convert All to {format}'
+  },
+
+  // Rotator Settings
+  rotator: {
+    title: 'Rotate & Flip',
+    badge: 'Client-side Canvas',
+    angleLabel: 'Rotation Angle (clockwise)',
+    angles: {
+      deg0: '0°',
+      deg90: '90°',
+      deg180: '180°',
+      deg270: '270°'
+    },
+    flipLabel: 'Flip',
+    flipHorizontal: 'Horizontal',
+    flipVertical: 'Vertical',
+    applyBtn: 'Apply Changes to All Images'
   },
 
   // File Item & List

@@ -2,6 +2,7 @@ import { ToolId } from '../types';
 import { ToolModule } from './types';
 import { compressModule } from './compress';
 import { convertModule } from './convert';
+import { rotateModule } from './rotate';
 
 /**
  * 工具模块注册表
@@ -12,6 +13,8 @@ export const TOOL_MODULES: Partial<Record<ToolId, ToolModule<any>>> = {
   compress: compressModule,
   /** 图片格式转换工具模块 */
   convert: convertModule,
+  /** 图片旋转与翻转工具模块 */
+  rotate: rotateModule,
 };
 
 /**

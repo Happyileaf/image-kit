@@ -50,14 +50,13 @@ export const TOOLS: ToolDefinition[] = [
   {
     id: 'rotate',
     name: 'Rotate & Flip',
-    shortDesc: 'Rotate 90°/180° or flip images horizontally and vertically.',
-    fullDesc: 'Correct orientation issues or mirror images with zero quality loss directly in the browser.',
+    shortDesc: 'Rotate 90°/180°/270° or flip images horizontally and vertically.',
+    fullDesc: 'Correct orientation issues or mirror images directly in the browser with high-quality local re-encoding.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'RotateCw',
     acceptedFormats: 'image/*',
-    features: ['Lossless rotation', 'Horizontal / vertical flip', 'Batch angle correction']
+    features: ['90°/180°/270° rotation', 'Horizontal / vertical flip', 'Batch angle correction']
   },
   {
     id: 'watermark',
