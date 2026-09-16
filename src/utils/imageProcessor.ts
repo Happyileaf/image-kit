@@ -1,5 +1,13 @@
 import JSZip from 'jszip';
 import { CompressOptions, ConvertOptions, ProcessedFileItem, TargetFormat } from '../types';
+import {
+  loadImageElement,
+  createCanvas2D,
+  fillWhiteBackground,
+  canvasToBlob,
+  resolveCompressOutputMime,
+  getSavedPercentage,
+} from './canvas-utils';
 
 /**
  * Format bytes to readable string (e.g. 1.2 MB, 450 KB)
@@ -54,82 +62,54 @@ export async function compressImage(
   savedPercentage: number;
   format: string;
 }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      let targetWidth = img.naturalWidth;
-      let targetHeight = img.naturalHeight;
+  let img: HTMLImageElement;
+  try {
+    img = await loadImageElement(item.previewUrl);
+  } catch {
+    throw new Error('Failed to load image for compression');
+  }
 
-      if (options.maxWidthOrHeight > 0) {
-        if (targetWidth > options.maxWidthOrHeight || targetHeight > options.maxWidthOrHeight) {
-          if (targetWidth > targetHeight) {
-            targetHeight = Math.round((targetHeight * options.maxWidthOrHeight) / targetWidth);
-            targetWidth = options.maxWidthOrHeight;
-          } else {
-            targetWidth = Math.round((targetWidth * options.maxWidthOrHeight) / targetHeight);
-            targetHeight = options.maxWidthOrHeight;
-          }
-        }
+  let targetWidth = img.naturalWidth;
+  let targetHeight = img.naturalHeight;
+
+  if (options.maxWidthOrHeight > 0) {
+    if (targetWidth > options.maxWidthOrHeight || targetHeight > options.maxWidthOrHeight) {
+      if (targetWidth > targetHeight) {
+        targetHeight = Math.round((targetHeight * options.maxWidthOrHeight) / targetWidth);
+        targetWidth = options.maxWidthOrHeight;
+      } else {
+        targetWidth = Math.round((targetWidth * options.maxWidthOrHeight) / targetHeight);
+        targetHeight = options.maxWidthOrHeight;
       }
+    }
+  }
 
-      const canvas = document.createElement('canvas');
-      canvas.width = targetWidth;
-      canvas.height = targetHeight;
-      const ctx = canvas.getContext('2d');
+  const { canvas, ctx } = createCanvas2D(targetWidth, targetHeight);
 
-      if (!ctx) {
-        reject(new Error('Failed to acquire canvas 2D rendering context'));
-        return;
-      }
+  // If output format is JPEG and image has transparency, paint white background
+  const outputMime = resolveCompressOutputMime(item.originalType, options.format);
+  if (outputMime === 'image/jpeg') {
+    fillWhiteBackground(ctx, targetWidth, targetHeight);
+  }
 
-      // If output format is JPEG and image has transparency, paint white background
-      let outputMime = item.originalType || 'image/jpeg';
-      if (options.format !== 'keep') {
-        outputMime = options.format;
-      } else if (!['image/jpeg', 'image/webp', 'image/png'].includes(outputMime)) {
-        outputMime = 'image/jpeg';
-      }
+  ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
 
-      if (outputMime === 'image/jpeg') {
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, targetWidth, targetHeight);
-      }
+  const qualityRatio = Math.max(0.05, Math.min(1, options.quality / 100));
 
-      ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+  const blob = await canvasToBlob(canvas, outputMime, qualityRatio);
+  const newSize = blob.size;
+  const savedPercentage = getSavedPercentage(item.originalSize, newSize);
+  const resultUrl = URL.createObjectURL(blob);
 
-      const qualityRatio = Math.max(0.05, Math.min(1, options.quality / 100));
-
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            reject(new Error('Canvas toBlob conversion failed'));
-            return;
-          }
-
-          const newSize = blob.size;
-          const savedPercentage = Math.round(
-            ((item.originalSize - newSize) / item.originalSize) * 100
-          );
-          const resultUrl = URL.createObjectURL(blob);
-
-          resolve({
-            blob,
-            url: resultUrl,
-            size: newSize,
-            width: targetWidth,
-            height: targetHeight,
-            savedPercentage,
-            format: outputMime,
-          });
-        },
-        outputMime,
-        qualityRatio
-      );
-    };
-
-    img.onerror = () => reject(new Error('Failed to load image for compression'));
-    img.src = item.previewUrl;
-  });
+  return {
+    blob,
+    url: resultUrl,
+    size: newSize,
+    width: targetWidth,
+    height: targetHeight,
+    savedPercentage,
+    format: outputMime,
+  };
 }
 
 /**
@@ -147,86 +127,53 @@ export async function convertImage(
   savedPercentage: number;
   format: string;
 }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      const targetWidth = img.naturalWidth;
-      const targetHeight = img.naturalHeight;
+  let img: HTMLImageElement;
+  try {
+    img = await loadImageElement(item.previewUrl);
+  } catch {
+    throw new Error('Failed to load image for conversion');
+  }
 
-      const canvas = document.createElement('canvas');
-      canvas.width = targetWidth;
-      canvas.height = targetHeight;
-      const ctx = canvas.getContext('2d');
+  const targetWidth = img.naturalWidth;
+  const targetHeight = img.naturalHeight;
 
-      if (!ctx) {
-        reject(new Error('Failed to acquire canvas 2D rendering context'));
-        return;
-      }
+  const { canvas, ctx } = createCanvas2D(targetWidth, targetHeight);
 
-      // If converting to JPEG, fill white background to prevent black alpha
-      if (options.targetFormat === 'image/jpeg') {
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, targetWidth, targetHeight);
-      }
+  // If converting to JPEG, fill white background to prevent black alpha
+  if (options.targetFormat === 'image/jpeg') {
+    fillWhiteBackground(ctx, targetWidth, targetHeight);
+  }
 
-      ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+  ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
 
-      const qualityRatio = Math.max(0.1, Math.min(1, options.quality / 100));
+  const qualityRatio = Math.max(0.1, Math.min(1, options.quality / 100));
 
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            // Fallback for formats not natively supported by browser canvas toBlob (e.g. avif in older browsers)
-            canvas.toBlob(
-              (fallbackBlob) => {
-                if (!fallbackBlob) {
-                  reject(new Error('Format conversion failed'));
-                  return;
-                }
-                const newSize = fallbackBlob.size;
-                const savedPercentage = Math.round(
-                  ((item.originalSize - newSize) / item.originalSize) * 100
-                );
-                resolve({
-                  blob: fallbackBlob,
-                  url: URL.createObjectURL(fallbackBlob),
-                  size: newSize,
-                  width: targetWidth,
-                  height: targetHeight,
-                  savedPercentage,
-                  format: 'image/webp',
-                });
-              },
-              'image/webp',
-              qualityRatio
-            );
-            return;
-          }
+  // canvasToBlob falls back to WebP for formats not natively supported by the browser (e.g. avif in older browsers)
+  let blob: Blob;
+  try {
+    blob = await canvasToBlob(canvas, options.targetFormat, qualityRatio);
+  } catch {
+    throw new Error('Format conversion failed');
+  }
 
-          const newSize = blob.size;
-          const savedPercentage = Math.round(
-            ((item.originalSize - newSize) / item.originalSize) * 100
-          );
-          const resultUrl = URL.createObjectURL(blob);
+  const outputFormat =
+    options.targetFormat !== 'image/webp' && blob.type === 'image/webp'
+      ? 'image/webp'
+      : options.targetFormat;
 
-          resolve({
-            blob,
-            url: resultUrl,
-            size: newSize,
-            width: targetWidth,
-            height: targetHeight,
-            savedPercentage,
-            format: options.targetFormat,
-          });
-        },
-        options.targetFormat,
-        qualityRatio
-      );
-    };
+  const newSize = blob.size;
+  const savedPercentage = getSavedPercentage(item.originalSize, newSize);
+  const resultUrl = URL.createObjectURL(blob);
 
-    img.onerror = () => reject(new Error('Failed to load image for conversion'));
-    img.src = item.previewUrl;
-  });
+  return {
+    blob,
+    url: resultUrl,
+    size: newSize,
+    width: targetWidth,
+    height: targetHeight,
+    savedPercentage,
+    format: outputFormat,
+  };
 }
 
 /**
