@@ -50,14 +50,13 @@ export const zhTools: ToolDefinition[] = [
   {
     id: 'rotate',
     name: '旋转与翻转',
-    shortDesc: '支持 90°/180° 旋转或水平、垂直镜像翻转。',
-    fullDesc: '快速修正照片朝向或镜像反转画面，纯浏览器计算，画质零损失。',
+    shortDesc: '支持 90°/180°/270° 旋转或水平、垂直镜像翻转。',
+    fullDesc: '快速修正照片朝向或镜像反转画面，纯浏览器本地计算，高质量重编码输出。',
     category: 'edit',
-    isAvailable: false,
-    badge: '即将上线',
+    isAvailable: true,
     iconName: 'RotateCw',
     acceptedFormats: 'image/*',
-    features: ['无损旋转', '水平/垂直镜像翻转', '批量角度修正']
+    features: ['90°/180°/270° 旋转', '水平/垂直镜像翻转', '批量角度修正']
   },
   {
     id: 'watermark',
@@ -266,6 +265,23 @@ export const zh = {
     maxQuality: '最高质量 (100%)',
     pngLosslessNote: 'PNG 为无损格式：系统将以像素级完整度保留所有颜色及透明通道，不会出现有损压缩噪点。',
     convertAllBtn: '全部转换为 {format}'
+  },
+
+  // Rotator Settings
+  rotator: {
+    title: '旋转与翻转设置',
+    badge: '浏览器 Canvas 引擎',
+    angleLabel: '旋转角度（顺时针）',
+    angles: {
+      deg0: '0°',
+      deg90: '90°',
+      deg180: '180°',
+      deg270: '270°'
+    },
+    flipLabel: '镜像翻转',
+    flipHorizontal: '水平翻转',
+    flipVertical: '垂直翻转',
+    applyBtn: '将设置重新应用至全部图片'
   },
 
   // File Item & List
