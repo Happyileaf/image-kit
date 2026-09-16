@@ -3,6 +3,7 @@ import { ResizeModeEnum } from './constants/resize-mode';
 import { WatermarkTypeEnum } from './constants/watermark-type';
 import { WatermarkPositionEnum } from './constants/watermark-position';
 import { CropAspectEnum } from './constants/crop-aspect';
+import { BlurEffectEnum } from './constants/blur-effect';
 
 export type ToolId = 
   | 'compress'
@@ -104,6 +105,12 @@ export interface NormalizedRect {
 export interface CropOptions {
   region: NormalizedRect; // single source of truth for the crop area, applied to every image in the batch
   aspect: CropAspectEnum; // aspect lock used as an interaction constraint inside the region editor
+}
+
+export interface BlurOptions {
+  effect: BlurEffectEnum; // redaction effect applied to every region
+  strength: number; // 1 to 100, mapped to region-size-relative pixel values so results stay consistent across batch image sizes
+  regions: NormalizedRect[]; // redaction areas applied to every image in the batch; empty array exports images unchanged
 }
 
 export type PageView = 

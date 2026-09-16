@@ -333,3 +333,70 @@ export function resizeRegion(
     height: (bottom - top) / imageHeight,
   };
 }
+
+/**
+ * 蒙版切片接口
+ * 描述一块暗色遮罩在单位矩形内的位置与尺寸（归一化坐标）
+ */
+export interface MaskPiece {
+  /** 左边缘（0 到 1，相对舞台宽度） */
+  x: number;
+  /** 上边缘（0 到 1，相对舞台高度） */
+  y: number;
+  /** 宽度（0 到 1，相对舞台宽度） */
+  width: number;
+  /** 高度（0 到 1，相对舞台高度） */
+  height: number;
+}
+
+/**
+ * 构造选区外暗色蒙版的切片集合
+ *
+ * @description 以全部选区的纵边界切分水平行带，每个行带内按覆盖选区的横区间
+ * 排序合并后填充空隙，使蒙版恰好覆盖所有选区之外的区域；单区域时退化为
+ * 上下整宽加中间左右四片，区域重叠时按并集处理；空数组返回整幅蒙版
+ * @param regions - 全部归一化选区
+ * @returns 蒙版切片数组，直接用于绝对定位渲染
+ * @example
+ * const pieces = buildMaskPieces([{ x: 0.2, y: 0.2, width: 0.3, height: 0.3 }]);
+ * console.log(pieces.length); // 4
+ */
+export function buildMaskPieces(regions: NormalizedRect[]): MaskPiece[] {
+  if (regions.length === 0) {
+    return [{ x: 0, y: 0, width: 1, height: 1 }];
+  }
+
+  const yBounds = Array.from(
+    new Set([0, ...regions.flatMap((region) => [region.y, region.y + region.height]), 1]),
+  ).sort((a, b) => a - b);
+
+  const pieces: MaskPiece[] = [];
+  for (let index = 0; index < yBounds.length - 1; index += 1) {
+    const bandTop = yBounds[index];
+    const bandBottom = yBounds[index + 1];
+    if (bandBottom - bandTop <= 0) continue;
+
+    const coveringIntervals = regions
+      .filter((region) => region.y <= bandTop && region.y + region.height >= bandBottom)
+      .map((region) => ({ left: region.x, right: region.x + region.width }))
+      .sort((a, b) => a.left - b.left);
+
+    let cursor = 0;
+    for (const interval of coveringIntervals) {
+      if (interval.left > cursor) {
+        pieces.push({
+          x: cursor,
+          y: bandTop,
+          width: interval.left - cursor,
+          height: bandBottom - bandTop,
+        });
+      }
+      cursor = Math.max(cursor, interval.right);
+    }
+    if (cursor < 1) {
+      pieces.push({ x: cursor, y: bandTop, width: 1 - cursor, height: bandBottom - bandTop });
+    }
+  }
+
+  return pieces;
+}

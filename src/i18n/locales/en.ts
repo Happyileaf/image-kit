@@ -71,13 +71,12 @@ export const enTools: ToolDefinition[] = [
     id: 'blur',
     name: 'Blur & Redact',
     shortDesc: 'Obscure sensitive text, faces, or credentials on device.',
-    fullDesc: 'Apply local pixelation or Gaussian blur to redact private info before sharing screenshots.',
+    fullDesc: 'Draw rectangle regions over sensitive info and obscure them with pixelation or Gaussian blur, processed entirely on local canvas before you share screenshots.',
     category: 'edit',
-    isAvailable: false,
-    badge: 'Coming soon',
+    isAvailable: true,
     iconName: 'EyeOff',
     acceptedFormats: 'image/*',
-    features: ['Brush & rectangle redaction', 'Pixelate or blur effects', '100% offline safety']
+    features: ['Rectangle region redaction', 'Pixelate or Gaussian blur', 'Strength fine-tuning', '100% offline safety']
   },
   {
     id: 'remove-bg',
@@ -356,13 +355,35 @@ export const en = {
     applyBtn: 'Apply Crop to All Images'
   },
 
+  // Redactor Settings
+  redactor: {
+    title: 'Redact Settings',
+    badge: 'Client-side Canvas',
+    effectLabel: 'Redaction Effect',
+    effects: {
+      pixelate: 'Pixelate',
+      gaussian: 'Gaussian Blur'
+    },
+    strengthLabel: 'Effect Strength',
+    regionsLabel: 'Redaction Regions',
+    regionCount: '{count} region(s) defined',
+    editRegionsBtn: 'Edit regions visually',
+    noFileHint: 'Add an image first to edit redaction regions.',
+    clearRegionsBtn: 'Clear all regions',
+    applyBtn: 'Apply Redaction to All Images'
+  },
+
   // Shared Region Editor
   regionEditor: {
     title: 'Edit Region',
     sizeBadge: '{width} × {height} px',
     hint: 'Drag on the image to draw a region, drag inside to move, use handles to resize.',
+    hintMulti: 'Drag on empty areas to add regions, click a region to select it, drag inside to move, use handles to resize.',
+    countBadge: '{count} region(s)',
+    deleteSelected: 'Delete selected region',
     cancel: 'Cancel',
-    apply: 'Apply Region'
+    apply: 'Apply Region',
+    applyRegions: 'Apply Regions'
   },
 
   // File Item & List

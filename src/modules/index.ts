@@ -6,6 +6,7 @@ import { rotateModule } from './rotate';
 import { resizeModule } from './resize';
 import { watermarkModule } from './watermark';
 import { cropModule } from './crop';
+import { blurModule } from './blur';
 
 /**
  * 工具模块注册表
@@ -24,6 +25,8 @@ export const TOOL_MODULES: Partial<Record<ToolId, ToolModule<any>>> = {
   watermark: watermarkModule,
   /** 图片裁剪工具模块 */
   crop: cropModule,
+  /** 图片打码遮盖工具模块 */
+  blur: blurModule,
 };
 
 /**

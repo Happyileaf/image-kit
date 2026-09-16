@@ -71,13 +71,12 @@ export const zhTools: ToolDefinition[] = [
     id: 'blur',
     name: '局部打码与遮盖',
     shortDesc: '在设备本地遮蔽敏感文字、面部人脸或隐私证件信息。',
-    fullDesc: '提供局部像素化马赛克或高斯模糊画笔，在分享截图前隐去敏感个人信息，绝不外泄。',
+    fullDesc: '框选需要隐去的矩形区域，以像素化马赛克或高斯模糊遮盖敏感信息，全程本地 Canvas 处理，分享截图更安心。',
     category: 'edit',
-    isAvailable: false,
-    badge: '即将上线',
+    isAvailable: true,
     iconName: 'EyeOff',
     acceptedFormats: 'image/*',
-    features: ['画笔与矩形框选', '马赛克与高斯模糊双重效果', '100% 离线隐私安全']
+    features: ['矩形选区打码', '马赛克与高斯模糊双重效果', '遮盖强度无级微调', '100% 离线隐私安全']
   },
   {
     id: 'remove-bg',
@@ -356,13 +355,35 @@ export const zh = {
     applyBtn: '将裁剪应用至全部图片'
   },
 
+  // Redactor Settings
+  redactor: {
+    title: '打码遮盖设置',
+    badge: '浏览器 Canvas 引擎',
+    effectLabel: '遮盖效果',
+    effects: {
+      pixelate: '像素化马赛克',
+      gaussian: '高斯模糊'
+    },
+    strengthLabel: '遮盖强度',
+    regionsLabel: '打码区域',
+    regionCount: '已定义 {count} 个打码区域',
+    editRegionsBtn: '可视化编辑区域',
+    noFileHint: '请先添加图片，再编辑打码区域。',
+    clearRegionsBtn: '清除全部区域',
+    applyBtn: '将打码应用至全部图片'
+  },
+
   // Shared Region Editor
   regionEditor: {
     title: '编辑选区',
     sizeBadge: '{width} × {height} 像素',
     hint: '在图片上拖拽绘制选区，框内拖拽移动，拖动手柄缩放。',
+    hintMulti: '在空白处拖拽新增打码区域，点击选中已有区域，框内拖拽移动，拖动手柄缩放。',
+    countBadge: '{count} 个区域',
+    deleteSelected: '删除选中区域',
     cancel: '取消',
-    apply: '应用选区'
+    apply: '应用选区',
+    applyRegions: '应用全部区域'
   },
 
   // File Item & List
