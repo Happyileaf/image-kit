@@ -115,7 +115,6 @@ export const en = {
   // Navigation
   nav: {
     tools: 'Tools',
-    essentials: 'Essentials',
     upcomingTools: 'Upcoming Tools',
     preview: 'Preview',
     about: 'About',
@@ -124,8 +123,6 @@ export const en = {
     local: 'Local',
     allTools: 'All Tools',
     switchLang: 'Language',
-    compressDesc: 'Reduce size without quality loss',
-    convertDesc: 'WebP, JPG, PNG & AVIF',
     roadmap: 'Roadmap',
     toolActive: 'Active',
     privacyTooltip: 'All files are processed locally inside your browser'
@@ -571,11 +568,6 @@ export const en = {
     toolsHeading: 'Tools',
     principlesHeader: 'Principles',
     principlesHeading: 'Principles',
-    compressor: 'Image Compressor',
-    converter: 'Format Converter',
-    resize: 'Resize Image',
-    crop: 'Crop Image',
-    watermark: 'Watermark & Redact',
     privacyArchitecture: 'Privacy Architecture',
     whyLocal: 'Why Local Processing?',
     verifyF12: 'Verify in DevTools (F12)',

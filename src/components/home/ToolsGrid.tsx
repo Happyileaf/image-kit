@@ -1,22 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Minimize2, 
-  Repeat, 
-  Maximize2, 
-  Crop, 
-  RotateCw, 
-  Stamp, 
-  EyeOff, 
-  Wand2, 
-  Layers,
+import {
   ArrowRight,
   ShieldCheck,
-  Search,
-  Sparkles
+  Search
 } from 'lucide-react';
 import { ToolDefinition, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
+import ToolIcon from '../tools/tool-icon';
 
 interface ToolsGridProps {
   onSelectTool: (toolId: ToolId) => void;
@@ -26,21 +17,6 @@ export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const { tools, categories, t } = useI18n();
-
-  const renderIcon = (iconName: string, className: string) => {
-    switch (iconName) {
-      case 'Minimize2': return <Minimize2 className={className} />;
-      case 'Repeat': return <Repeat className={className} />;
-      case 'Maximize2': return <Maximize2 className={className} />;
-      case 'Crop': return <Crop className={className} />;
-      case 'RotateCw': return <RotateCw className={className} />;
-      case 'Stamp': return <Stamp className={className} />;
-      case 'EyeOff': return <EyeOff className={className} />;
-      case 'Wand2': return <Wand2 className={className} />;
-      case 'Layers': return <Layers className={className} />;
-      default: return <Sparkles className={className} />;
-    }
-  };
 
   const filteredTools = tools.filter((tool) => {
     const matchesCategory = selectedCategory === 'all' || tool.category === selectedCategory;
@@ -121,7 +97,7 @@ export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
                           : 'bg-stone-100 dark:bg-stone-800/80 text-stone-400 dark:text-stone-500'
                       }`}
                     >
-                      {renderIcon(tool.iconName, 'h-5 w-5')}
+                      <ToolIcon iconName={tool.iconName} className="h-5 w-5" />
                     </div>
 
                     {isAvailable ? (

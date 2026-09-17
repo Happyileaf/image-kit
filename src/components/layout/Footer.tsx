@@ -4,7 +4,11 @@ import { GITHUB_REPO_URL } from '../../constants/site';
 import { useI18n } from '../../i18n/context';
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, tools } = useI18n();
+
+  /** 就绪状态直接派生自 i18n 工具定义，工具上线后无需再手动同步页脚 */
+  const availableTools = tools.filter((tool) => tool.isAvailable);
+  const upcomingTools = tools.filter((tool) => !tool.isAvailable);
 
   return (
     <footer className="border-t border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-900/40 py-12 text-stone-600 dark:text-stone-400 transition-colors duration-150">
@@ -46,40 +50,24 @@ export function Footer() {
               {t('footer.toolsHeading')}
             </div>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  to="/tools/compress"
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
-                >
-                  {t('footer.compressor')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/tools/convert"
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
-                >
-                  {t('footer.converter')}
-                </Link>
-              </li>
-              <li>
-                <span className="text-stone-400 dark:text-stone-500 flex items-center justify-between">
-                  {t('footer.resize')}
-                  <span className="text-[10px] bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400 px-1 rounded">{t('footer.soon')}</span>
-                </span>
-              </li>
-              <li>
-                <span className="text-stone-400 dark:text-stone-500 flex items-center justify-between">
-                  {t('footer.crop')}
-                  <span className="text-[10px] bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400 px-1 rounded">{t('footer.soon')}</span>
-                </span>
-              </li>
-              <li>
-                <span className="text-stone-400 dark:text-stone-500 flex items-center justify-between">
-                  {t('footer.watermark')}
-                  <span className="text-[10px] bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400 px-1 rounded">{t('footer.soon')}</span>
-                </span>
-              </li>
+              {availableTools.map((tool) => (
+                <li key={tool.id}>
+                  <Link
+                    to={`/tools/${tool.id}`}
+                    className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+                  >
+                    {tool.name}
+                  </Link>
+                </li>
+              ))}
+              {upcomingTools.map((tool) => (
+                <li key={tool.id}>
+                  <span className="text-stone-400 dark:text-stone-500 flex items-center justify-between">
+                    {tool.name}
+                    <span className="text-[10px] bg-stone-200/60 dark:bg-stone-800 text-stone-500 dark:text-stone-400 px-1 rounded">{t('footer.soon')}</span>
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 

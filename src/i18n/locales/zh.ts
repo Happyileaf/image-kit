@@ -115,7 +115,6 @@ export const zh = {
   // Navigation
   nav: {
     tools: '工具库',
-    essentials: '常用基础',
     upcomingTools: '敬请期待',
     preview: '预览',
     about: '关于项目',
@@ -124,8 +123,6 @@ export const zh = {
     local: '本地',
     allTools: '全部工具',
     switchLang: '语言',
-    compressDesc: '保真减小体积，节省带宽',
-    convertDesc: 'WebP、JPG、PNG 与 AVIF',
     roadmap: '规划中',
     toolActive: '使用中',
     privacyTooltip: '所有文件均在您浏览器沙箱本地处理，绝不上云'
@@ -571,11 +568,6 @@ export const zh = {
     toolsHeading: '工具列表',
     principlesHeader: '设计原则',
     principlesHeading: '设计原则',
-    compressor: '图片压缩工具',
-    converter: '格式转换器',
-    resize: '尺寸缩放',
-    crop: '自由裁剪',
-    watermark: '水印与隐私打码',
     privacyArchitecture: '隐私架构细节',
     whyLocal: '为什么坚持本地运算？',
     verifyF12: '按 F12 自主验证流量',
