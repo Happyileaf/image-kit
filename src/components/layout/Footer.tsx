@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, HardDrive, Zap, Lock, Github } from 'lucide-react';
+import { ShieldCheck, HardDrive, Zap, Lock, Github, ImagePlus } from 'lucide-react';
 import { GITHUB_REPO_URL } from '../../constants/site';
 import { useI18n } from '../../i18n/context';
 
@@ -15,7 +15,7 @@ export function Footer() {
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-stone-900 dark:bg-stone-800 text-stone-50">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                <ImagePlus className="h-4 w-4 text-emerald-400" />
               </div>
               <span className="font-semibold text-stone-900 dark:text-stone-100 tracking-tight">ImageKit</span>
             </div>
