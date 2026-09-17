@@ -8,3 +8,9 @@ export const GITHUB_FEATURE_REQUEST_URL = `${GITHUB_REPO_URL}/issues/new?labels=
 
 /** 附带 bug 标签的新建 Issue 链接，用于问题反馈直达 */
 export const GITHUB_BUG_REPORT_URL = `${GITHUB_REPO_URL}/issues/new?labels=bug`;
+
+/** 联系邮箱，为不使用 GitHub 的用户提供兜底的反馈渠道 */
+export const CONTACT_EMAIL = 'contact@contextlab.top';
+
+/** 联系邮箱的 mailto 链接 */
+export const CONTACT_MAILTO_URL = `mailto:${CONTACT_EMAIL}`;

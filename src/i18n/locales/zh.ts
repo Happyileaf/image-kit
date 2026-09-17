@@ -179,7 +179,9 @@ export const zh = {
     bugDesc: '遇到异常或处理结果不符合预期？带上复现步骤提一个 Issue。',
     contributeTitle: '参与代码共建',
     contributeDesc: 'Star、Fork、提交 Pull Request，每一行代码都公开接受审查。',
-    note: '遵循零追踪原则，本站不设站内反馈表单，所有声音直达 GitHub。'
+    emailTitle: '邮件联系',
+    emailDesc: '不习惯用 GitHub？来信 contact@contextlab.top，同样会被认真对待。',
+    note: '遵循零追踪原则，本站不设站内反馈表单，GitHub 与邮件任你选择。'
   },
 
   // Tool workspace & Header

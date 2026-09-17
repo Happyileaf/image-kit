@@ -179,7 +179,9 @@ export const en = {
     bugDesc: 'Something broken or unexpected? Open an issue with steps to reproduce it.',
     contributeTitle: 'Contribute Code',
     contributeDesc: 'Star, fork, open a pull request — every line is public and open to review.',
-    note: 'Zero tracking means no in-app feedback forms — every voice goes straight to GitHub.'
+    emailTitle: 'Email Us',
+    emailDesc: 'Not on GitHub? Write to contact@contextlab.top — we read every email.',
+    note: 'Zero tracking means no in-app feedback forms — GitHub or email, your call.'
   },
 
   // Tool workspace & Header
