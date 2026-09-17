@@ -27,11 +27,10 @@ import { ComparisonModal } from './ComparisonModal';
 
 interface ToolWorkspaceProps {
   tool: ToolDefinition;
-  onBack: () => void;
   initialFiles?: File[];
 }
 
-export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspaceProps) {
+export function ToolWorkspace({ tool, initialFiles = [] }: ToolWorkspaceProps) {
   const [items, setItems] = useState<ProcessedFileItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [inspectingItem, setInspectingItem] = useState<ProcessedFileItem | null>(null);
@@ -186,7 +185,7 @@ export function ToolWorkspace({ tool, onBack, initialFiles = [] }: ToolWorkspace
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col bg-stone-50/50 dark:bg-stone-950/50 transition-colors">
       {/* Tool Header */}
-      <ToolHeader tool={tool} onBack={onBack} fileCount={items.length} />
+      <ToolHeader tool={tool} fileCount={items.length} />
 
       {/* Main Workspace Area */}
       <div className="mx-auto max-w-7xl flex-1 px-4 sm:px-6 lg:px-8 py-8 w-full">

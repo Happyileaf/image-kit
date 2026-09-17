@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, HardDrive, Terminal, Lock, CheckCheck, ArrowRight, Github, ArrowUpRight, Code2, Copy, Check } from 'lucide-react';
 import { GITHUB_REPO_URL } from '../../constants/site';
-import { PageView, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
-
-interface PrivacyPageProps {
-  onNavigate: (view: PageView) => void;
-}
+import { Seo } from '../seo/Seo';
+import { PRIVACY_META, getPrivacyJsonLd } from '../../constants/seo';
 
 const guaranteeIcons = [
   { icon: HardDrive, bg: 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300' },
@@ -16,8 +14,8 @@ const guaranteeIcons = [
 
 const CLONE_COMMAND = `git clone ${GITHUB_REPO_URL}.git`;
 
-export function PrivacyPage({ onNavigate }: PrivacyPageProps) {
-  const { t, tRaw } = useI18n();
+export function PrivacyPage() {
+  const { t, tRaw, language } = useI18n();
 
   const guarantees = tRaw<Array<{ title: string; desc: string }>>('privacy.guarantees') || [];
   const evidencePoints = tRaw<Array<{ title: string; desc: string }>>('privacy.evidence1Points') || [];
@@ -64,6 +62,13 @@ export function PrivacyPage({ onNavigate }: PrivacyPageProps) {
   };
 
   return (
+    <>
+      <Seo
+        title={PRIVACY_META[language].title}
+        description={PRIVACY_META[language].description}
+        path="/privacy"
+        jsonLd={getPrivacyJsonLd()}
+      />
     <div className="py-12 md:py-16 transition-colors">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 
@@ -213,16 +218,17 @@ export function PrivacyPage({ onNavigate }: PrivacyPageProps) {
           <p className="text-xs text-stone-500 dark:text-stone-400">
             {t('privacy.ctaPrompt')}
           </p>
-          <button
-            onClick={() => onNavigate({ type: 'tool', toolId: 'compress' as ToolId })}
+          <Link
+            to="/tools/compress"
             className="flex items-center gap-1.5 rounded-lg bg-stone-900 dark:bg-stone-100 px-4 py-2 text-xs font-semibold text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-white transition-colors"
           >
             <span>{t('privacy.ctaBtn')}</span>
             <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+          </Link>
         </div>
 
       </div>
     </div>
+    </>
   );
 }

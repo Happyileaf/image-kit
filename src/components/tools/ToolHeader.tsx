@@ -1,14 +1,14 @@
+import { Link } from 'react-router-dom';
 import { ShieldCheck, ArrowLeft, Layers, Minimize2, Repeat } from 'lucide-react';
 import { ToolDefinition } from '../../types';
 import { useI18n } from '../../i18n/context';
 
 interface ToolHeaderProps {
   tool: ToolDefinition;
-  onBack: () => void;
   fileCount: number;
 }
 
-export function ToolHeader({ tool, onBack, fileCount }: ToolHeaderProps) {
+export function ToolHeader({ tool, fileCount }: ToolHeaderProps) {
   const { t } = useI18n();
 
   return (
@@ -17,13 +17,13 @@ export function ToolHeader({ tool, onBack, fileCount }: ToolHeaderProps) {
         
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400 mb-3 font-medium">
-          <button
-            onClick={onBack}
+          <Link
+            to="/"
             className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors flex items-center gap-1"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>{t('workspace.breadcrumbTools')}</span>
-          </button>
+          </Link>
           <span>/</span>
           <span className="text-stone-900 dark:text-stone-100">{tool.name}</span>
           {fileCount > 0 && (

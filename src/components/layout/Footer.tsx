@@ -1,13 +1,9 @@
+import { Link } from 'react-router-dom';
 import { ShieldCheck, HardDrive, Zap, Lock, Github } from 'lucide-react';
 import { GITHUB_REPO_URL } from '../../constants/site';
-import { PageView, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
 
-interface FooterProps {
-  onNavigate: (view: PageView) => void;
-}
-
-export function Footer({ onNavigate }: FooterProps) {
+export function Footer() {
   const { t } = useI18n();
 
   return (
@@ -52,20 +48,20 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
             <ul className="space-y-2 text-sm">
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'tool', toolId: 'compress' as ToolId })}
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors text-left"
+                <Link
+                  to="/tools/compress"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
                 >
                   {t('footer.compressor')}
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'tool', toolId: 'convert' as ToolId })}
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors text-left"
+                <Link
+                  to="/tools/convert"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
                 >
                   {t('footer.converter')}
-                </button>
+                </Link>
               </li>
               <li>
                 <span className="text-stone-400 dark:text-stone-500 flex items-center justify-between">
@@ -95,29 +91,29 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
             <ul className="space-y-2 text-sm">
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'privacy' })}
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors text-left flex items-center gap-1.5"
+                <Link
+                  to="/privacy"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors flex items-center gap-1.5"
                 >
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                   {t('footer.privacyArchitecture')}
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'about' })}
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors text-left"
+                <Link
+                  to="/about"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
                 >
                   {t('footer.whyLocal')}
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate({ type: 'privacy' })}
-                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors text-left"
+                <Link
+                  to="/privacy"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
                 >
                   {t('footer.verifyDevTools')}
-                </button>
+                </Link>
               </li>
               <li>
                 <a
@@ -143,4 +139,3 @@ export function Footer({ onNavigate }: FooterProps) {
     </footer>
   );
 }
-

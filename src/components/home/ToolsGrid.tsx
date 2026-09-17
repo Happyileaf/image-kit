@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Minimize2, 
   Repeat, 
@@ -102,22 +103,14 @@ export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredTools.map((tool: ToolDefinition) => {
             const isAvailable = tool.isAvailable;
+            const cardClass = `group relative flex flex-col justify-between rounded-xl border p-6 transition-all ${
+              isAvailable
+                ? 'border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-xs hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-md cursor-pointer'
+                : 'border-stone-200/70 dark:border-stone-800/70 opacity-80 bg-stone-50/60 dark:bg-stone-900/40'
+            }`;
 
-            return (
-              <div
-                key={tool.id}
-                id={`tool-card-${tool.id}`}
-                onClick={() => {
-                  if (isAvailable) {
-                    onSelectTool(tool.id);
-                  }
-                }}
-                className={`group relative flex flex-col justify-between rounded-xl border p-6 transition-all ${
-                  isAvailable
-                    ? 'border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-xs hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-md cursor-pointer'
-                    : 'border-stone-200/70 dark:border-stone-800/70 opacity-80 bg-stone-50/60 dark:bg-stone-900/40'
-                }`}
-              >
+            const cardContent = (
+              <div>
                 <div>
                   {/* Top Bar inside card */}
                   <div className="flex items-center justify-between">
@@ -181,6 +174,21 @@ export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
                     <span className="text-stone-400 dark:text-stone-500">{t('grid.inDevelopment')}</span>
                   )}
                 </div>
+              </div>
+            );
+
+            return isAvailable ? (
+              <Link
+                key={tool.id}
+                id={`tool-card-${tool.id}`}
+                to={`/tools/${tool.id}`}
+                className={cardClass}
+              >
+                {cardContent}
+              </Link>
+            ) : (
+              <div key={tool.id} id={`tool-card-${tool.id}`} className={cardClass}>
+                {cardContent}
               </div>
             );
           })}

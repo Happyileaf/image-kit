@@ -8,12 +8,11 @@ import {
   XCircle,
   Sparkles
 } from 'lucide-react';
-import { PageView, ToolId } from '../../types';
+import { Link } from 'react-router-dom';
+import { ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
-
-interface AboutPageProps {
-  onNavigate: (view: PageView) => void;
-}
+import { Seo } from '../seo/Seo';
+import { ABOUT_META, getAboutJsonLd } from '../../constants/seo';
 
 const pillarStyles = [
   { icon: ShieldCheck, bg: 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300' },
@@ -22,14 +21,21 @@ const pillarStyles = [
   { icon: Zap, bg: 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300' }
 ];
 
-export function AboutPage({ onNavigate }: AboutPageProps) {
-  const { t, tRaw } = useI18n();
+export function AboutPage() {
+  const { t, tRaw, language } = useI18n();
 
   const pillars = tRaw<Array<{ title: string; desc: string }>>('about.pillars') || [];
   const tableRows = tRaw<Array<{ feature: string; traditional: string; imagekit: string }>>('about.tableRows') || [];
 
   return (
-    <div className="py-12 md:py-16 transition-colors">
+    <>
+      <Seo
+        title={ABOUT_META[language].title}
+        description={ABOUT_META[language].description}
+        path="/about"
+        jsonLd={getAboutJsonLd()}
+      />
+      <div className="py-12 md:py-16 transition-colors">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -107,17 +113,18 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
             <h3 className="text-lg font-bold text-white dark:text-stone-100">{t('about.ctaTitle')}</h3>
             <p className="text-xs text-stone-400 mt-1">{t('about.ctaSubtitle')}</p>
           </div>
-          <button
-            onClick={() => onNavigate({ type: 'tool', toolId: 'compress' as ToolId })}
+          <Link
+            to="/tools/compress"
             className="flex items-center gap-2 rounded-xl bg-white dark:bg-stone-100 px-5 py-2.5 text-xs font-bold text-stone-900 dark:text-stone-900 hover:bg-stone-100 dark:hover:bg-white transition-colors shrink-0"
           >
             <span>{t('about.ctaBtn')}</span>
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
 
       </div>
     </div>
+    </>
   );
 }
 

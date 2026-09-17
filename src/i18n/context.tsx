@@ -51,7 +51,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
-    document.title = 'ImageKit v1.0';
+    // Note: document.title is managed by the Seo component (react-helmet-async)
   }, [language]);
 
   const dictionary = useMemo(() => {

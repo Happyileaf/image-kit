@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ShieldCheck, Lock, HardDrive, Zap, ArrowRight, Sparkles } from 'lucide-react';
 import { ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
@@ -37,22 +38,22 @@ export function Hero({ onSelectTool, onTrySample }: HeroProps) {
 
         {/* Quick Action Buttons */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <button
+          <Link
             id="hero-compress-btn"
-            onClick={() => onSelectTool('compress')}
+            to="/tools/compress"
             className="flex items-center gap-2 rounded-lg bg-stone-900 dark:bg-stone-100 px-5 py-2.5 text-sm font-medium text-white dark:text-stone-900 shadow-xs hover:bg-stone-800 dark:hover:bg-white transition-colors focus:outline-none"
           >
             <span>{t('hero.openCompressor')}</span>
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
           
-          <button
+          <Link
             id="hero-convert-btn"
-            onClick={() => onSelectTool('convert')}
+            to="/tools/convert"
             className="flex items-center gap-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-900 px-5 py-2.5 text-sm font-medium text-stone-700 dark:text-stone-300 shadow-xs hover:bg-stone-50 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none"
           >
             <span>{t('hero.openConverter')}</span>
-          </button>
+          </Link>
 
           <button
             id="hero-sample-btn"

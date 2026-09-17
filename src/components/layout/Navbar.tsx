@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ShieldCheck, 
   Layers, 
@@ -15,32 +16,30 @@ import {
   X,
   Sparkles
 } from 'lucide-react';
-import { PageView, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
-interface NavbarProps {
-  currentView: PageView;
-  onNavigate: (view: PageView) => void;
-}
-
-export function Navbar({ currentView, onNavigate }: NavbarProps) {
+export function Navbar() {
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t, getToolById } = useI18n();
+  const location = useLocation();
 
-  const handleToolClick = (toolId: ToolId) => {
-    setToolsDropdownOpen(false);
-    setMobileMenuOpen(false);
-    onNavigate({ type: 'tool', toolId });
-  };
+  const isToolActive = (toolId: string) => 
+    location.pathname === `/tools/${toolId}`;
 
-  const isToolActive = (toolId: ToolId) => 
-    currentView.type === 'tool' && currentView.toolId === toolId;
+  const isHome = location.pathname === '/';
+  const isAbout = location.pathname === '/about';
+  const isPrivacy = location.pathname === '/privacy';
 
   const compressTool = getToolById('compress');
   const convertTool = getToolById('convert');
+
+  const closeMenus = () => {
+    setToolsDropdownOpen(false);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-stone-200/80 dark:border-stone-800 bg-stone-50/90 dark:bg-stone-950/90 backdrop-blur-md transition-colors duration-150">
@@ -48,13 +47,9 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
         
         {/* Left: Logo */}
         <div className="flex items-center gap-6 lg:gap-8">
-          <button
-            id="nav-logo-button"
-            onClick={() => {
-              setToolsDropdownOpen(false);
-              setMobileMenuOpen(false);
-              onNavigate({ type: 'home' });
-            }}
+          <Link
+            to="/"
+            onClick={closeMenus}
             className="group flex items-center gap-2.5 text-left focus:outline-none"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-stone-900 dark:bg-stone-800 text-stone-50 shadow-sm transition-transform group-hover:scale-105">
@@ -66,18 +61,17 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
                 {t('nav.versionBadge')}
               </span>
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Nav Items */}
           <nav className="hidden md:flex items-center gap-1">
             {/* Tools Dropdown */}
             <div className="relative">
               <button
-                id="nav-tools-menu-button"
                 onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
                 onBlur={() => setTimeout(() => setToolsDropdownOpen(false), 200)}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                  currentView.type === 'tool' 
+                  location.pathname.startsWith('/tools/')
                     ? 'text-stone-900 dark:text-stone-100 bg-stone-200/60 dark:bg-stone-800/80' 
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/50'
                 }`}
@@ -93,9 +87,9 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
                     {t('nav.essentials')}
                   </div>
                   
-                  <button
-                    id="nav-menu-compress-btn"
-                    onMouseDown={() => handleToolClick('compress')}
+                  <Link
+                    to="/tools/compress"
+                    onClick={closeMenus}
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors text-left ${
                       isToolActive('compress') 
                         ? 'bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 font-medium' 
@@ -109,11 +103,11 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
                       <div className="font-medium text-stone-900 dark:text-stone-100">{compressTool?.name || 'Image Compressor'}</div>
                       <div className="text-xs text-stone-500 dark:text-stone-400">{compressTool?.shortDesc || t('nav.compressDesc')}</div>
                     </div>
-                  </button>
+                  </Link>
 
-                  <button
-                    id="nav-menu-convert-btn"
-                    onMouseDown={() => handleToolClick('convert')}
+                  <Link
+                    to="/tools/convert"
+                    onClick={closeMenus}
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors text-left ${
                       isToolActive('convert') 
                         ? 'bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 font-medium' 
@@ -127,7 +121,7 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
                       <div className="font-medium text-stone-900 dark:text-stone-100">{convertTool?.name || 'Image Converter'}</div>
                       <div className="text-xs text-stone-500 dark:text-stone-400">{convertTool?.shortDesc || t('nav.convertDesc')}</div>
                     </div>
-                  </button>
+                  </Link>
 
                   <div className="my-1 border-t border-stone-100 dark:border-stone-800"></div>
                   
@@ -171,32 +165,32 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
             </div>
 
             {/* About Link */}
-            <button
-              id="nav-about-button"
-              onClick={() => onNavigate({ type: 'about' })}
+            <Link
+              to="/about"
+              onClick={closeMenus}
               className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                currentView.type === 'about' 
+                isAbout 
                   ? 'text-stone-900 dark:text-stone-100 bg-stone-200/60 dark:bg-stone-800/80' 
                   : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/50'
               }`}
             >
               <Info className="h-4 w-4" />
               <span>{t('nav.about')}</span>
-            </button>
+            </Link>
 
             {/* Privacy Link */}
-            <button
-              id="nav-privacy-button"
-              onClick={() => onNavigate({ type: 'privacy' })}
+            <Link
+              to="/privacy"
+              onClick={closeMenus}
               className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                currentView.type === 'privacy' 
+                isPrivacy 
                   ? 'text-stone-900 dark:text-stone-100 bg-stone-200/60 dark:bg-stone-800/80' 
                   : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/50'
               }`}
             >
               <Lock className="h-4 w-4" />
               <span>{t('nav.privacy')}</span>
-            </button>
+            </Link>
           </nav>
         </div>
 
@@ -212,10 +206,10 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
             <LanguageSwitcher variant="pill" />
           </div>
 
-          {/* Privacy Status Indicator (Explicitly: No login, No account) */}
-          <button
-            id="nav-privacy-badge-btn"
-            onClick={() => onNavigate({ type: 'privacy' })}
+          {/* Privacy Status Indicator */}
+          <Link
+            to="/privacy"
+            onClick={closeMenus}
             className="flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/80 dark:bg-emerald-950/40 px-3 py-1 text-xs font-medium text-emerald-800 dark:text-emerald-300 transition-colors hover:bg-emerald-100/90 dark:hover:bg-emerald-900/50"
             title={t('nav.privacyTooltip')}
           >
@@ -226,11 +220,10 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
             <span className="hidden lg:inline">{t('nav.onDevice')}</span>
             <span className="lg:hidden">{t('nav.local')}</span>
-          </button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
-            id="nav-mobile-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex md:hidden rounded-lg p-2 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 focus:outline-none"
             aria-label="Toggle menu"
@@ -256,60 +249,50 @@ export function Navbar({ currentView, onNavigate }: NavbarProps) {
           </div>
 
           <div className="space-y-1">
-            <button
-              id="mobile-nav-home"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigate({ type: 'home' });
-              }}
+            <Link
+              to="/"
+              onClick={closeMenus}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 text-left"
             >
               <Layers className="h-4 w-4 text-stone-500 dark:text-stone-400" />
               {t('nav.allTools')}
-            </button>
-            <button
-              id="mobile-nav-compress"
-              onClick={() => handleToolClick('compress')}
+            </Link>
+            <Link
+              to="/tools/compress"
+              onClick={closeMenus}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 text-left"
             >
               <Minimize2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               {compressTool?.name || 'Image Compressor'}
-            </button>
-            <button
-              id="mobile-nav-convert"
-              onClick={() => handleToolClick('convert')}
+            </Link>
+            <Link
+              to="/tools/convert"
+              onClick={closeMenus}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 text-left"
             >
               <Repeat className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               {convertTool?.name || 'Image Converter'}
-            </button>
+            </Link>
             <div className="my-1 border-t border-stone-100 dark:border-stone-800"></div>
-            <button
-              id="mobile-nav-about"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigate({ type: 'about' });
-              }}
+            <Link
+              to="/about"
+              onClick={closeMenus}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 text-left"
             >
               <Info className="h-4 w-4 text-stone-500 dark:text-stone-400" />
               {t('nav.about')}
-            </button>
-            <button
-              id="mobile-nav-privacy"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigate({ type: 'privacy' });
-              }}
+            </Link>
+            <Link
+              to="/privacy"
+              onClick={closeMenus}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-800 text-left"
             >
               <Lock className="h-4 w-4 text-stone-500 dark:text-stone-400" />
               {t('nav.privacy')}
-            </button>
+            </Link>
           </div>
         </div>
       )}
     </header>
   );
 }
-
