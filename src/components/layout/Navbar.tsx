@@ -76,14 +76,14 @@ export function Navbar() {
               </button>
 
               {toolsDropdownOpen && (
-                <div className="absolute left-0 top-full mt-1.5 w-80 max-h-[75vh] overflow-y-auto rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-2 shadow-lg ring-1 ring-black/5 dark:ring-white/10 z-50">
-                  {/* 已就绪工具：按分类分组渲染为可点链接 */}
+                <div className="absolute left-0 top-full mt-1.5 w-64 max-h-[70vh] overflow-y-auto rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-2 shadow-lg ring-1 ring-black/5 dark:ring-white/10 z-50">
+                  {/* 已就绪工具：按分类分组渲染为紧凑单行链接，工具增多后仍可快速扫读 */}
                   {navCategories.map((cat) => {
                     const categoryTools = availableTools.filter((tool) => tool.category === cat.id);
                     if (categoryTools.length === 0) return null;
                     return (
                       <div key={cat.id}>
-                        <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500">
+                        <div className="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500">
                           {cat.name}
                         </div>
                         {categoryTools.map((tool) => (
@@ -91,19 +91,16 @@ export function Navbar() {
                             key={tool.id}
                             to={`/tools/${tool.id}`}
                             onClick={closeMenus}
-                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors text-left ${
+                            className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-1.5 text-sm transition-colors text-left ${
                               isToolActive(tool.id)
                                 ? 'bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 font-medium'
                                 : 'text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/60'
                             }`}
                           >
-                            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 text-emerald-600 dark:text-emerald-400">
-                              <ToolIcon iconName={tool.iconName} className="h-4 w-4" />
+                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 text-emerald-600 dark:text-emerald-400">
+                              <ToolIcon iconName={tool.iconName} className="h-3.5 w-3.5" />
                             </div>
-                            <div>
-                              <div className="font-medium text-stone-900 dark:text-stone-100">{tool.name}</div>
-                              <div className="text-xs text-stone-500 dark:text-stone-400">{tool.shortDesc}</div>
-                            </div>
+                            <span className="font-medium text-stone-900 dark:text-stone-100">{tool.name}</span>
                           </Link>
                         ))}
                       </div>
