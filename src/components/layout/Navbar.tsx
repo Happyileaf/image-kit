@@ -14,8 +14,10 @@ import {
   Stamp, 
   Menu,
   X,
-  ImagePlus
+  ImagePlus,
+  Github
 } from 'lucide-react';
+import { GITHUB_REPO_URL } from '../../constants/site';
 import { useI18n } from '../../i18n/context';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
@@ -57,9 +59,6 @@ export function Navbar() {
             </div>
             <div>
               <span className="text-lg font-semibold tracking-tight text-stone-900 dark:text-stone-100">ImageKit</span>
-              <span className="hidden text-xs text-stone-500 dark:text-stone-400 sm:inline-block sm:ml-2 font-mono">
-                {t('nav.versionBadge')}
-              </span>
             </div>
           </Link>
 
@@ -205,6 +204,17 @@ export function Navbar() {
           <div className="hidden sm:block">
             <LanguageSwitcher variant="pill" />
           </div>
+
+          {/* GitHub Link */}
+          <a
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="flex items-center justify-center rounded-lg p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/50 transition-colors"
+          >
+            <Github className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+          </a>
 
           {/* Privacy Status Indicator */}
           <Link

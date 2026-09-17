@@ -124,7 +124,6 @@ export const en = {
     local: 'Local',
     allTools: 'All Tools',
     switchLang: 'Language',
-    versionBadge: 'v1.0',
     compressDesc: 'Reduce size without quality loss',
     convertDesc: 'WebP, JPG, PNG & AVIF',
     roadmap: 'Roadmap',

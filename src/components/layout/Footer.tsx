@@ -18,7 +18,6 @@ export function Footer() {
                 <ShieldCheck className="h-4 w-4 text-emerald-400" />
               </div>
               <span className="font-semibold text-stone-900 dark:text-stone-100 tracking-tight">ImageKit</span>
-              <span className="text-xs text-stone-400 dark:text-stone-500 font-mono">v1.0</span>
             </div>
             
             <p className="max-w-md text-sm text-stone-600 dark:text-stone-400 leading-relaxed">

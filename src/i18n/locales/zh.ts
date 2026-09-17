@@ -124,7 +124,6 @@ export const zh = {
     local: '本地',
     allTools: '全部工具',
     switchLang: '语言',
-    versionBadge: 'v1.0',
     compressDesc: '保真减小体积，节省带宽',
     convertDesc: 'WebP、JPG、PNG 与 AVIF',
     roadmap: '规划中',
