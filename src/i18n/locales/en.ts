@@ -450,7 +450,7 @@ export const en = {
   about: {
     manifestoBadge: 'Product Manifesto',
     title: 'Why ImageKit?',
-    subtitle: 'Every day, millions of people upload personal photos, receipts, ID cards, and proprietary graphics to random online conversion websites. We built ImageKit to change that.',
+    subtitle: 'Every day, millions of people upload personal photos, receipts, ID cards, and proprietary graphics to random online conversion websites. We built ImageKit simply to offer a more privacy-respecting alternative for image processing.',
     pillars: [
       {
         title: '1. Privacy First',
