@@ -28,92 +28,22 @@
 
 > **隐私理念 > 技术便利 > 精确数据统计**
 
-### 1. 图片永远不离开用户设备
+四条核心原则（速览）：
 
-所有图片处理必须在浏览器本地完成。
+1. **图片永远不离开用户设备** — 所有处理在浏览器本地完成
+2. **不允许服务端兜底** — 宁可不做，也不上传图片到服务器
+3. **无需登录** — 打开即可使用
+4. **默认不追踪用户** — 不为精确 UV 牺牲隐私
 
-禁止将以下任何数据发送到服务器、第三方 API 或远程处理服务：
-
-* 图片文件
-* Blob / ArrayBuffer / Base64
-* 图片内容
-* 文件名
-* EXIF / 图片元数据
-* 中间处理结果
-* 最终处理结果
-
-### 2. 不允许服务端兜底
-
-如果某项功能无法可靠地在浏览器本地实现：
-
-> **宁可不做，也不能上传图片到服务器处理。**
-
-可以选择：
-
-* 降低功能范围
-* 使用 WASM / Web Worker / WebGPU 等本地技术
-* 标记为 Coming Soon
-* 暂不实现
-
-### 3. 无需登录
-
-不需要：
-
-* 注册
-* 登录
-* 用户账户
-* 用户资料
-
-打开即可使用。
-
-### 4. 默认不追踪用户
-
-不要默认引入：
-
-* Analytics SDK
-* 用户 ID
-* Fingerprint
-* Tracking Cookie
-* 第三方行为追踪
-
-如果只是需要了解网站整体访问量，优先使用 CDN / Server 的基础访问日志。
-
-**不为了精确 UV 而牺牲隐私。**
+> 各原则的具体禁止项、可选替代方案以及服务器/浏览器职责边界见 [docs/agents/CORE-PRINCIPLES.md](docs/agents/CORE-PRINCIPLES.md)。
 
 ---
 
 ## 技术边界
 
-服务器只负责提供：
+服务器只负责提供静态资源（HTML / CSS / JS / WASM / 本地模型），不得参与图片的上传、处理、存储或分析。
 
-* HTML
-* CSS
-* JavaScript
-* WASM
-* 本地模型及其他静态资源
-
-服务器不得参与：
-
-* 图片上传
-* 图片处理
-* 图片存储
-* 图片分析
-
-允许：
-
-```text
-Browser → Server：获取网站资源
-Browser → Browser：图片处理
-Browser → User：下载结果
-```
-
-禁止：
-
-```text
-Browser → Server：上传图片
-Server → Server：处理图片
-Server → Browser：返回处理结果
-```
+> 允许与禁止的数据流图见 [docs/agents/CORE-PRINCIPLES.md](docs/agents/CORE-PRINCIPLES.md#技术边界)。
 
 ---
 
@@ -196,6 +126,14 @@ PrivacyNotice
 > **始终优先保护隐私。**
 
 不要因为“更简单”“开发更快”“服务端性能更好”而上传用户图片。
+
+---
+
+## Agent 署名规范
+
+当 AI Agent 在编码上有实际贡献时，必须在 commit message 中以 `Co-Authored-By` trailer 形式署名；纯人工编写或仅做咨询性建议的不需要。
+
+> 各模型的署名格式与 GitHub 邮箱对应表见 [docs/agents/AGENT-ATTRIBUTION.md](docs/agents/AGENT-ATTRIBUTION.md)。
 
 ---
 
