@@ -25,12 +25,12 @@ export interface PageMeta {
  */
 export const HOME_META: Record<'en' | 'zh', PageMeta> = {
   en: {
-    title: 'Free Privacy-First Image Tools — Compress, Convert, Resize & More | ImageKit',
+    title: 'Free Privacy-First Image Tools | ImageKit',
     description:
       'Compress, convert, resize, crop, rotate, watermark, and blur images entirely in your browser. No uploads, no login, 100% local processing. Free and privacy-first.',
   },
   zh: {
-    title: '免费隐私优先的图片工具 — 压缩、转换、裁剪等 | ImageKit',
+    title: '免费隐私优先的图片工具 | ImageKit',
     description:
       '完全在浏览器中压缩、转换、调整尺寸、裁剪、旋转、加水印和模糊图片。无需上传，无需登录，100% 本地处理。免费且注重隐私。',
   },
