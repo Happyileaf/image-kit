@@ -162,13 +162,24 @@ export const en = {
   grid: {
     title: 'Image Processing Suite',
     subtitle: 'Select a tool to begin. Processing runs in browser memory with zero network latency.',
-    searchPlaceholder: 'Search tools...',
     readyToUse: 'Ready to use',
     inDevelopment: 'In Development',
     openTool: 'Open Tool',
-    allImages: 'All Images',
-    noToolsFound: 'No tools found matching "{query}".',
-    resetFilters: 'Reset filters'
+    allImages: 'All Images'
+  },
+
+  // Community & Open Source
+  community: {
+    badge: 'Open Source',
+    title: 'ImageKit is shaped by its community',
+    subtitle: 'Found a bug, want a new feature, or feel like contributing code? The project is fully open source — join in on GitHub.',
+    featureTitle: 'Request a Feature',
+    featureDesc: 'Want a new tool or capability? File a feature request — popular ideas get prioritized.',
+    bugTitle: 'Report a Bug',
+    bugDesc: 'Something broken or unexpected? Open an issue with steps to reproduce it.',
+    contributeTitle: 'Contribute Code',
+    contributeDesc: 'Star, fork, open a pull request — every line is public and open to review.',
+    note: 'Zero tracking means no in-app feedback forms — every voice goes straight to GitHub.'
   },
 
   // Tool workspace & Header
@@ -573,6 +584,7 @@ export const en = {
     verifyF12: 'Verify in DevTools (F12)',
     verifyDevTools: 'Verify in DevTools (F12)',
     openSource: 'Open Source (GitHub)',
+    feedback: 'Feedback & Requests',
     soonBadge: 'Soon',
     soon: 'Soon',
     copyright: '© {year} ImageKit. Open prototype for browser-native media processing.',

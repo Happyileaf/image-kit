@@ -4,6 +4,7 @@ import { useI18n } from '../i18n/context';
 import { Seo } from '../components/seo/Seo';
 import { Hero } from '../components/home/Hero';
 import { ToolsGrid } from '../components/home/ToolsGrid';
+import Community from '../components/home/community';
 import { HOME_META, getHomeJsonLd } from '../constants/seo';
 import { createSamplePhoto } from '../utils/imageProcessor';
 
@@ -35,6 +36,7 @@ export function HomePage() {
       />
       <Hero onSelectTool={handleSelectTool} onTrySample={handleTrySample} />
       <ToolsGrid onSelectTool={handleSelectTool} />
+      <Community />
     </>
   );
 }

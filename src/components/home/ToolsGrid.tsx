@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  ShieldCheck,
-  Search
+  ShieldCheck
 } from 'lucide-react';
 import { ToolDefinition, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
@@ -14,70 +12,25 @@ interface ToolsGridProps {
 }
 
 export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const { tools, categories, t } = useI18n();
-
-  const filteredTools = tools.filter((tool) => {
-    const matchesCategory = selectedCategory === 'all' || tool.category === selectedCategory;
-    const matchesSearch = 
-      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.shortDesc.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const { tools, t } = useI18n();
 
   return (
     <section className="py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header & Filters */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-8 border-b border-stone-200 dark:border-stone-800">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-2xl">
-              {t('grid.title')}
-            </h2>
-            <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-              {t('grid.subtitle')}
-            </p>
-          </div>
 
-          {/* Search bar & Category filters */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 dark:text-stone-500" />
-              <input
-                id="tools-search-input"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('grid.searchPlaceholder')}
-                className="w-full sm:w-52 rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 py-1.5 pl-9 pr-3 text-sm text-stone-800 dark:text-stone-200 placeholder-stone-400 dark:placeholder-stone-500 focus:border-stone-400 dark:focus:border-stone-600 focus:outline-none"
-              />
-            </div>
-
-            {/* Category tabs */}
-            <div className="flex rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 p-1">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  id={`cat-tab-${cat.id}`}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
-                    selectedCategory === cat.id
-                      ? 'bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 shadow-xs'
-                      : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
-                  }`}
-                >
-                  {cat.name}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* Section Header */}
+        <div className="pb-8 border-b border-stone-200 dark:border-stone-800">
+          <h2 className="text-xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-2xl">
+            {t('grid.title')}
+          </h2>
+          <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
+            {t('grid.subtitle')}
+          </p>
         </div>
 
         {/* Tools Cards Grid */}
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredTools.map((tool: ToolDefinition) => {
+          {tools.map((tool: ToolDefinition) => {
             const isAvailable = tool.isAvailable;
             const cardClass = `group relative flex flex-col justify-between rounded-xl border p-6 transition-all ${
               isAvailable
@@ -169,24 +122,6 @@ export function ToolsGrid({ onSelectTool }: ToolsGridProps) {
             );
           })}
         </div>
-
-        {/* Empty Search State */}
-        {filteredTools.length === 0 && (
-          <div className="mt-12 rounded-xl border border-dashed border-stone-200 dark:border-stone-800 py-12 text-center">
-            <p className="text-sm text-stone-500 dark:text-stone-400">
-              {t('grid.noToolsFound', { query: searchQuery })}
-            </p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedCategory('all');
-              }}
-              className="mt-3 text-xs font-semibold text-stone-900 dark:text-stone-100 underline"
-            >
-              {t('grid.resetFilters')}
-            </button>
-          </div>
-        )}
 
       </div>
     </section>

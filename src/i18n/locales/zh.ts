@@ -162,13 +162,24 @@ export const zh = {
   grid: {
     title: '图像处理套件',
     subtitle: '选择工具开始处理。所有运算均在浏览器内存完成，零网络延迟与流量消耗。',
-    searchPlaceholder: '搜索工具...',
     readyToUse: '即刻可用',
     inDevelopment: '开发中',
     openTool: '打开工具',
-    allImages: '全部图像格式',
-    noToolsFound: '未找到与“{query}”相符的工具。',
-    resetFilters: '重置筛选'
+    allImages: '全部图像格式'
+  },
+
+  // Community & Open Source
+  community: {
+    badge: '开源共建',
+    title: 'ImageKit 由社区一起塑造',
+    subtitle: '遇到 Bug、想要新功能，或是想贡献代码？项目完全开源，欢迎到 GitHub 参与讨论与共建。',
+    featureTitle: '提交功能建议',
+    featureDesc: '想要新工具或新特性？提交 Feature Request，呼声高的优先排期。',
+    bugTitle: '报告问题',
+    bugDesc: '遇到异常或处理结果不符合预期？带上复现步骤提一个 Issue。',
+    contributeTitle: '参与代码共建',
+    contributeDesc: 'Star、Fork、提交 Pull Request，每一行代码都公开接受审查。',
+    note: '遵循零追踪原则，本站不设站内反馈表单，所有声音直达 GitHub。'
   },
 
   // Tool workspace & Header
@@ -573,6 +584,7 @@ export const zh = {
     verifyF12: '按 F12 自主验证流量',
     verifyDevTools: '按 F12 自主验证流量',
     openSource: '开源代码（GitHub）',
+    feedback: '功能建议与反馈',
     soonBadge: '即将上线',
     soon: '即将上线',
     copyright: '© {year} ImageKit • 纯浏览器原生媒体处理套件',

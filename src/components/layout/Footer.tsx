@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, HardDrive, Zap, Lock, Github, ImagePlus } from 'lucide-react';
-import { GITHUB_REPO_URL } from '../../constants/site';
+import { ShieldCheck, HardDrive, Zap, Lock, Github, ImagePlus, Lightbulb } from 'lucide-react';
+import { GITHUB_REPO_URL, GITHUB_ISSUES_URL } from '../../constants/site';
 import { useI18n } from '../../i18n/context';
 
 export function Footer() {
@@ -111,6 +111,17 @@ export function Footer() {
                 >
                   <Github className="h-3.5 w-3.5 text-stone-400 dark:text-stone-500" />
                   {t('footer.openSource')}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={GITHUB_ISSUES_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors flex items-center gap-1.5"
+                >
+                  <Lightbulb className="h-3.5 w-3.5 text-stone-400 dark:text-stone-500" />
+                  {t('footer.feedback')}
                 </a>
               </li>
             </ul>
