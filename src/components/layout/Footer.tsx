@@ -1,4 +1,5 @@
-import { ShieldCheck, HardDrive, Zap, Lock } from 'lucide-react';
+import { ShieldCheck, HardDrive, Zap, Lock, Github } from 'lucide-react';
+import { GITHUB_REPO_URL } from '../../constants/site';
 import { PageView, ToolId } from '../../types';
 import { useI18n } from '../../i18n/context';
 
@@ -117,6 +118,17 @@ export function Footer({ onNavigate }: FooterProps) {
                 >
                   {t('footer.verifyDevTools')}
                 </button>
+              </li>
+              <li>
+                <a
+                  href={GITHUB_REPO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors flex items-center gap-1.5"
+                >
+                  <Github className="h-3.5 w-3.5 text-stone-400 dark:text-stone-500" />
+                  {t('footer.openSource')}
+                </a>
               </li>
             </ul>
           </div>
