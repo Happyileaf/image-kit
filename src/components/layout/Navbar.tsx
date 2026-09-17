@@ -12,9 +12,9 @@ import {
   Crop, 
   RotateCw, 
   Stamp, 
-  Menu, 
+  Menu,
   X,
-  Sparkles
+  ImagePlus
 } from 'lucide-react';
 import { useI18n } from '../../i18n/context';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -53,7 +53,7 @@ export function Navbar() {
             className="group flex items-center gap-2.5 text-left focus:outline-none"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-stone-900 dark:bg-stone-800 text-stone-50 shadow-sm transition-transform group-hover:scale-105">
-              <Sparkles className="h-5 w-5 text-emerald-400" />
+              <ImagePlus className="h-5 w-5 text-emerald-400" />
             </div>
             <div>
               <span className="text-lg font-semibold tracking-tight text-stone-900 dark:text-stone-100">ImageKit</span>
